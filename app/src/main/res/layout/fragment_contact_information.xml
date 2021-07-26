@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_tooth">
+
+    <TextView
+        android:id="@+id/contact_titleSurname"
+        android:layout_width="100dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center_vertical"
+        android:textSize="12sp"
+        android:text="@string/fragment_c_i_label_surname"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/contact_editSurname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="10dp"
+        android:hint="@string/fragment_c_i_label_surname"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@id/contact_titleSurname"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/contact_titleSurname"
+         />
+
+    <TextView
+        android:id="@+id/contact_titleName"
+        android:layout_width="100dp"
+        android:layout_height="20dp"
+        android:gravity="center_vertical"
+        android:textSize="12sp"
+        android:layout_marginTop="16dp"
+        android:text="@string/fragment_c_i_label_name"
+        app:layout_constraintStart_toStartOf="@id/contact_titleSurname"
+        app:layout_constraintTop_toBottomOf="@id/contact_titleSurname"
+        />
+
+    <TextView
+        android:id="@+id/contact_editName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:hint="@string/fragment_c_i_label_name"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@id/contact_titleName"
+        app:layout_constraintBottom_toBottomOf="@id/contact_titleName"
+        />
+
+    <TextView
+        android:id="@+id/contact_titlePatronymic"
+        android:layout_width="100dp"
+        android:layout_height="20dp"
+        android:gravity="center_vertical"
+        android:textSize="12sp"
+        android:layout_marginTop="16dp"
+        android:text="@string/fragment_c_i_label_patronymic"
+        app:layout_constraintStart_toStartOf="@id/contact_titleName"
+        app:layout_constraintTop_toBottomOf="@id/contact_titleName"
+        />
+
+    <TextView
+        android:id="@+id/contact_editPatronymic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:hint="@string/fragment_c_i_label_patronymic"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@id/contact_titlePatronymic"
+        app:layout_constraintBottom_toBottomOf="@id/contact_titlePatronymic"
+        />
+
+    <TextView
+        android:id="@+id/contact_titleBirth"
+        android:layout_width="100dp"
+        android:layout_height="20dp"
+        android:gravity="center_vertical"
+        android:textSize="12sp"
+        android:layout_marginTop="16dp"
+        android:text="@string/fragment_c_i_label_birth"
+        app:layout_constraintStart_toStartOf="@id/contact_titlePatronymic"
+        app:layout_constraintTop_toBottomOf="@id/contact_titlePatronymic"
+        />
+
+    <TextView
+        android:id="@+id/contact_editBirth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:hint="@string/fragment_c_i_label_birth"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@id/contact_titleBirth"
+        app:layout_constraintBottom_toBottomOf="@id/contact_titleBirth"
+        />
+
+    <TextView
+        android:id="@+id/contact_titleGender"
+        android:layout_width="100dp"
+        android:layout_height="20dp"
+        android:gravity="center_vertical"
+        android:textSize="12sp"
+        android:layout_marginTop="16dp"
+        android:text="@string/fragment_c_i_label_gender"
+        app:layout_constraintStart_toStartOf="@id/contact_titleBirth"
+        app:layout_constraintTop_toBottomOf="@id/contact_titleBirth"
+        />
+
+    <TextView
+        android:id="@+id/contact_editGender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:hint="@string/fragment_c_i_label_gender"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@id/contact_titleGender"
+        app:layout_constraintBottom_toBottomOf="@id/contact_titleGender"
+        />
+
+    <TextView
+        android:id="@+id/contact_titleTelephone"
+        android:layout_width="100dp"
+        android:layout_height="20dp"
+        android:gravity="center_vertical"
+        android:textSize="12sp"
+        android:layout_marginTop="16dp"
+        android:text="@string/fragment_c_i_label_telephone"
+        app:layout_constraintStart_toStartOf="@id/contact_titleGender"
+        app:layout_constraintTop_toBottomOf="@id/contact_titleGender"
+        />
+
+    <TextView
+        android:id="@+id/contact_editTelephone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:hint="@string/fragment_c_i_label_telephone"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@id/contact_titleTelephone"
+        app:layout_constraintBottom_toBottomOf="@id/contact_titleTelephone"
+        />
+
+    <TextView
+        android:id="@+id/contact_titleAddress"
+        android:layout_width="100dp"
+        android:layout_height="20dp"
+        android:gravity="center_vertical"
+        android:textSize="12sp"
+        android:layout_marginTop="16dp"
+        android:text="@string/fragment_c_i_label_address"
+        app:layout_constraintStart_toStartOf="@id/contact_titleTelephone"
+        app:layout_constraintTop_toBottomOf="@id/contact_titleTelephone"
+        />
+
+    <TextView
+        android:id="@+id/contact_editAddress"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:hint="@string/fragment_c_i_label_address"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/contact_titleAddress"
+        app:layout_constraintTop_toTopOf="@+id/contact_titleAddress" />
+
+    <ImageView
+        android:id="@+id/id_contact_info_anim"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="invisible"
+        app:srcCompat="@android:drawable/ic_menu_rotate" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

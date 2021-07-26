@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:background="@android:drawable/editbox_background">
+
+    <TextView
+        android:id="@+id/id_vh_service"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:hint="@string/template_visit_history_service"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/id_vh_date"
+        android:layout_width="90dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/black"
+        android:hint="@string/template_visit_history_data"
+        app:layout_constraintStart_toStartOf="@id/id_vh_service"
+        app:layout_constraintTop_toBottomOf="@id/id_vh_service" />
+
+    <TextView
+        android:id="@+id/id_vh_label_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/template_visit_history_label_type"
+        app:layout_constraintBottom_toBottomOf="@id/id_vh_date"
+        app:layout_constraintStart_toEndOf="@id/id_vh_date"
+        />
+
+    <TextView
+        android:id="@+id/id_vh_edit_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:layout_marginStart="4dp"
+        android:hint="@string/template_visit_history_label_type"
+        app:layout_constraintBottom_toBottomOf="@id/id_vh_label_type"
+        app:layout_constraintStart_toEndOf="@id/id_vh_label_type"
+         />
+
+    <TextView
+        android:id="@+id/id_vh_label_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="24dp"
+        android:text="@string/template_visit_history_label_count"
+        app:layout_constraintStart_toStartOf="@id/id_vh_date"
+        app:layout_constraintTop_toBottomOf="@id/id_vh_date" />
+
+    <TextView
+        android:id="@+id/id_vh_edit_count"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@id/id_vh_label_count"
+        app:layout_constraintStart_toEndOf="@id/id_vh_label_count" />
+
+    <TextView
+        android:id="@+id/id_vh_label_sum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:text="@string/template_visit_history_label_sum"
+        app:layout_constraintBottom_toBottomOf="@id/id_vh_edit_count"
+        app:layout_constraintStart_toEndOf="@id/id_vh_edit_count" />
+
+    <TextView
+        android:id="@+id/id_vh_edit_sum"
+        android:layout_width="90dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="@id/id_vh_label_sum"
+        app:layout_constraintStart_toEndOf="@id/id_vh_label_sum" />
+
+    <TextView
+        android:id="@+id/id_vh_label_doctor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/template_visit_history_label_doctor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/id_vh_service"
+        app:layout_constraintTop_toBottomOf="@id/id_vh_label_count" />
+
+    <TextView
+        android:id="@+id/id_vh_edit_doctor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:textColor="@color/black"
+        android:text="@string/template_visit_history_label_doctor"
+        app:layout_constraintBottom_toBottomOf="@id/id_vh_label_doctor"
+        app:layout_constraintStart_toEndOf="@id/id_vh_label_doctor" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_tooth"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/id_list_department_label_title1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="center"
+        android:text="@string/fragment_list_department_label_title1"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/id_list_department_label_title2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:text="@string/fragment_list_department_label_title2"
+        app:layout_constraintEnd_toEndOf="@+id/id_list_department_label_title1"
+        app:layout_constraintStart_toStartOf="@+id/id_list_department_label_title1"
+        app:layout_constraintTop_toBottomOf="@+id/id_list_department_label_title1" />
+
+    <TextView
+        android:id="@+id/fragment_list_department_label_therapeutic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:text="@string/fragment_list_department_label_therapeutic"
+        app:layout_constraintStart_toStartOf="@+id/id_list_department_label_title2"
+        app:layout_constraintTop_toBottomOf="@+id/id_list_department_label_title2" />
+
+    <TextView
+        android:id="@+id/fragment_list_department_label_orthopedic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:text="@string/fragment_list_department_label_orthopedic"
+        app:layout_constraintStart_toStartOf="@+id/fragment_list_department_label_therapeutic"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_list_department_label_therapeutic" />
+
+    <TextView
+        android:id="@+id/fragment_list_department_label_LPO"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:text="@string/fragment_list_department_label_LPO"
+        app:layout_constraintStart_toStartOf="@+id/fragment_list_department_label_orthopedic"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_list_department_label_orthopedic" />
+
+    <TextView
+        android:id="@+id/fragment_list_department_label_orthopedicLPO"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:text="@string/fragment_list_department_label_orthopedicLPO"
+        app:layout_constraintStart_toStartOf="@+id/fragment_list_department_label_LPO"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_list_department_label_LPO" />
+
+    <TextView
+        android:id="@+id/fragment_list_department_label_surgery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:text="@string/fragment_list_department_label_surgery"
+        app:layout_constraintStart_toStartOf="@+id/fragment_list_department_label_orthopedicLPO"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_list_department_label_orthopedicLPO" />
+
+    <TextView
+        android:id="@+id/fragment_list_department_label_LOR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:text="@string/fragment_list_department_label_LOR"
+        app:layout_constraintStart_toStartOf="@+id/fragment_list_department_label_surgery"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_list_department_label_surgery" />
+</androidx.constraintlayout.widget.ConstraintLayout>

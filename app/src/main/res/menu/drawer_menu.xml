@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/id_dm_contact_information"
+            android:icon="@drawable/baseline_person_white_24"
+            android:title="@string/drawer_menu_contact_information" />
+        <item
+            android:id="@+id/id_dm_contracts"
+            android:icon="@drawable/contract"
+            android:title="@string/drawer_menu_contracts"
+            />
+        <item
+            android:id="@+id/id_dm_visit_history"
+            android:icon="@drawable/history_128"
+            android:title="@string/drawer_menu_visit_history"
+            />
+        <item
+            android:id="@+id/id_dm_x_rays"
+            android:icon="@drawable/x_ray_128"
+            android:title="@string/drawer_menu_x_rays"
+            />
+        <item
+            android:id="@+id/id_dm_pictures_visit"
+            android:icon="@drawable/pictures_visit_24"
+            android:title="@string/drawer_menu_pictures_visit"
+            />
+        <item
+            android:id="@+id/id_dm_irradiation"
+            android:icon="@drawable/radiation_128"
+            android:title="@string/drawer_menu_irradiation"
+            />
+        <item
+            android:id="@+id/id_dm_appointment"
+            android:icon="@drawable/round_menu_book_24"
+            android:title="@string/drawer_menu_appointment"
+            />
+        <item
+            android:id="@+id/id_dm_schedule"
+            android:icon="@drawable/baseline_schedule_24"
+            android:title="@string/drawer_menu_schedule"
+            />
+
+    </group>
+
+</menu>

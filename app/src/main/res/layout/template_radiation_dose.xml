@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:background="@android:drawable/editbox_background">
+
+    <TextView
+        android:id="@+id/template_radiation_dose_label_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:text="@string/template_radiation_dose_label_date"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/template_radiation_dose_edit_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:textColor="@color/black"
+        android:hint="@string/template_radiation_dose_label_date"
+        app:layout_constraintBottom_toBottomOf="@id/template_radiation_dose_label_date"
+        app:layout_constraintStart_toEndOf="@id/template_radiation_dose_label_date" />
+
+    <TextView
+        android:id="@+id/template_radiation_dose_label_teeth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="@string/template_radiation_dose_label_teeth"
+        app:layout_constraintBottom_toBottomOf="@id/template_radiation_dose_edit_date"
+        app:layout_constraintStart_toEndOf="@id/template_radiation_dose_edit_date" />
+
+    <TextView
+        android:id="@+id/template_radiation_dose_edit_teeth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:layout_marginStart="4dp"
+        app:layout_constraintBottom_toBottomOf="@id/template_radiation_dose_label_teeth"
+        app:layout_constraintStart_toEndOf="@id/template_radiation_dose_label_teeth" />
+
+    <TextView
+        android:id="@+id/template_radiation_dose_label_dose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="@string/template_radiation_dose_label_dose"
+        app:layout_constraintStart_toStartOf="@id/template_radiation_dose_label_date"
+        app:layout_constraintTop_toBottomOf="@id/template_radiation_dose_label_date" />
+
+    <TextView
+        android:id="@+id/template_radiation_dose_edit_dose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:textColor="@color/black"
+        android:hint="@string/template_radiation_dose_label_dose"
+        app:layout_constraintBottom_toBottomOf="@id/template_radiation_dose_label_dose"
+        app:layout_constraintStart_toEndOf="@id/template_radiation_dose_label_dose" />
+
+    <TextView
+        android:id="@+id/template_radiation_dose_label_type_of_research"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="@string/template_radiation_dose_label_type_of_research"
+        app:layout_constraintBottom_toBottomOf="@id/template_radiation_dose_edit_dose"
+        app:layout_constraintStart_toEndOf="@id/template_radiation_dose_edit_dose" />
+
+    <TextView
+        android:id="@+id/template_radiation_dose_edit_type_of_research"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/template_radiation_dose_label_type_of_research"
+        android:textColor="@color/black"
+        android:layout_marginStart="4dp"
+        android:inputType="textCapSentences|textMultiLine"
+        android:maxLines="2"
+        android:ellipsize="none"
+        app:layout_constraintStart_toEndOf="@id/template_radiation_dose_label_type_of_research"
+        app:layout_constraintTop_toTopOf="@+id/template_radiation_dose_label_type_of_research"
+        tools:ignore="TextViewEdits" />
+
+    <TextView
+        android:id="@+id/template_radiation_dose_label_doctor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:text="@string/template_radiation_dose_label_doctor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/template_radiation_dose_label_dose"
+        app:layout_constraintTop_toBottomOf="@id/template_radiation_dose_edit_type_of_research" />
+
+    <TextView
+        android:id="@+id/template_radiation_dose_edit_doctor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:layout_marginStart="4dp"
+        android:hint="@string/template_radiation_dose_label_doctor"
+        app:layout_constraintBottom_toBottomOf="@id/template_radiation_dose_label_doctor"
+        app:layout_constraintStart_toEndOf="@id/template_radiation_dose_label_doctor" />
+</androidx.constraintlayout.widget.ConstraintLayout>

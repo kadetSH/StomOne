@@ -1,0 +1,161 @@
+<resources>
+    <string name="app_name">Belstom1</string>
+    <string name="iconDent">TODO</string>
+    <string name="authorization_polyclinic_name">Стоматологическая поликлиника №1 г. Белгорода</string>
+    <string name="authorization_label">Авторизация в базе</string>
+    <string name="authorization_hint_surname">Фамилия</string>
+    <string name="authorization_hint_name">Имя</string>
+    <string name="authorization_hint_patronymic">Отчество</string>
+    <string name="authorization_hint_password">Пароль</string>
+    <string name="authorization_btn_enterBase">Вход</string>
+    <string name="authorization_btn_setPassword">Пароль</string>
+    <string name="set_pass_hint_telephone">Номер телефона</string>
+    <string name="set_pass_hint_birth">Дата рождения</string>
+    <string name="set_password_title">Для получения нового пароля по смс необходимо заполнить поля указанные ниже. Сотовый телефон указать в формате  «9101234567», который так же должен быть указан в вашей электронной карте.</string>
+    <string name="btn_password_request">Запрос пароля</string>
+    <string name="btn_password_data_dialog">Календарь</string>
+    <string name="spinner_login">Выбор предыдущей авторизации</string>
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
+
+    <!--    Toast ответы-->
+    <string name="toast_password_sent">Пароль отправлен по смс</string>
+    <string name="toast_password_client_found">Клиент найден</string>
+    <string name="toast_password_surname_filds">Поле «Фамилия» не заполнено</string>
+    <string name="toast_password_name_filds">Поле «Имя» не заполнено</string>
+    <string name="toast_password_patronymic_filds">Поле «Отчество» не заполнено</string>
+    <string name="toast_password_telephone_filds">Поле «Телефон» не заполнено</string>
+    <string name="toast_password_birth_filds">Поле «День рождения» не заполнено</string>
+    <string name="toast_authorization_password_filds">Поле «Пароль» не заполнено</string>
+    <string name="toast_password_error_request">Сбой запроса пароля</string>
+    <string name="toast_authorization_error_request">Сбой запроса идентификатора</string>
+    <string name="toast_authorization_id_found">Пароль верен</string>
+    <string name="toast_recording_time_is_busy">В данное время свободной записи нет.</string>
+    <string name="toast_make_an_appointment">Записаться на прием к врачу?</string>
+    <string name="labelYes" translatable="false">Да</string>
+    <string name="labelNo" translatable="false">Нет</string>
+    <!--    -->
+
+    <!--    Template contracts-->
+    <string name="template_contracts_label_date">Дата создания:</string>
+    <string name="template_contracts_label_finish">Завершен</string>
+    <string name="template_contracts_label_doctor">Врач:</string>
+    <string name="template_contracts_contracts_number">Номер договора</string>
+    <!--    -->
+
+    <!--    Template visit history-->
+    <string name="template_visit_history_service">Оказанная услуга</string>
+    <string name="template_visit_history_data">Дата услуги</string>
+    <string name="template_visit_history_label_type">Вид операции:</string>
+    <string name="template_visit_history_label_count">Количество:</string>
+    <string name="template_visit_history_label_sum">Сумма:</string>
+    <string name="template_visit_history_label_doctor">Врач:</string>
+    <!--    -->
+
+    <!--    Template x-rays-->
+    <string name="template_x_rays_label_date">Дата:</string>
+    <string name="template_x_rays_label_number">№ направления:</string>
+    <string name="template_x_rays_label_type_of_research">Вид исследования:</string>
+    <string name="template_x_rays_label_financing">Финансирование:</string>
+    <string name="template_x_rays_label_teeth">Зуб(ы)/вся челюсть:</string>
+    <string name="template_x_rays_label_doctor">Врач:</string>
+    <string name="template_x_rays_no_pictures">Нет снимков</string>
+    <!--    -->
+
+    <!--    Template pictures visit-->
+    <string name="template_pictures_visit_label_date">Дата:</string>
+    <string name="template_pictures_visit_label_number">Номер:</string>
+    <string name="template_pictures_visit_label_doctor">Врач:</string>
+    <!--    -->
+
+    <!--    Template radiation dose-->
+    <string name="template_radiation_dose_label_date">Дата:</string>
+    <string name="template_radiation_dose_label_teeth">Зуб(ы)/полость рта:</string>
+    <string name="template_radiation_dose_label_dose">Доза:</string>
+    <string name="template_radiation_dose_label_type_of_research">Вид:</string>
+    <string name="template_radiation_dose_label_doctor">Врач:</string>
+    <!--    -->
+
+    <!--    Template office hours-->
+    <string name="template_office_hours_edit_doctor">Врач ФИО</string>
+    <string name="template_office_hours_edit_profession">Врач должность</string>
+    <string name="template_office_hours_edit_dey">День</string>
+    <string name="template_office_hours_edit_date">Дата</string>
+    <string name="template_office_hours_edit_reception">Прием</string>
+    <string name="template_office_hours_no_reception">Нет приема</string>
+    <!--    -->
+
+    <!--    Template business hours-->
+    <string name="template_business_hours_time">Время</string>
+    <!--    -->
+
+    <!--   Template appointment -->
+    <string name="template_appointment_title">Заявка</string>
+    <string name="template_appointment_doctor_label">Врач:</string>
+    <string name="template_appointment_profession_label">Профессия:</string>
+    <string name="template_appointment_date_label">Дата:</string>
+    <string name="template_appointment_time_start_label">c:</string>
+    <string name="template_appointment_time_end_label">по:</string>
+    <!--    -->
+
+    <!--    Drawer menu-->
+    <string name="drawer_menu_contact_information">Контактная информация</string>
+    <string name="drawer_menu_contracts">Договоры</string>
+    <string name="drawer_menu_visit_history">История посещений</string>
+    <string name="drawer_menu_x_rays">Рентгеновские снимки</string>
+    <string name="drawer_menu_pictures_visit">Фото приемов</string>
+    <string name="drawer_menu_irradiation">Дозы облучения</string>
+    <string name="drawer_menu_appointment">Мои записи на прием</string>
+    <string name="drawer_menu_schedule">Расписание</string>
+    <!--    -->
+
+    <!--    Messaging service-->
+    <string name="uploadWorker_title">Название пуша</string>
+    <string name="uploadWorker_message">Сообщение пуша</string>
+    <string name="uploadWorker_item">Push item</string>
+    <string name="uploadWorker_channelName" translatable="false">Channel name</string>
+    <string name="uploadWorker_channelDescription" translatable="false">Channel description"</string>
+    <string name="uploadWorker_clickMe" translatable="false">Нажать</string>
+    <!--    -->
+
+    <!--    Fragment Push-->
+    <string name="fragment_push_title_edit">Тема сообщения</string>
+    <string name="fragment_push_message_edit">Текст сообщения</string>
+    <!--    -->
+
+    <!--    Fragment fragment_contact_information-->
+    <string name="fragment_c_i_label_surname">Фамилия</string>
+    <string name="fragment_c_i_label_name">Имя</string>
+    <string name="fragment_c_i_label_patronymic">Отчество</string>
+    <string name="fragment_c_i_label_birth">Дата рождения</string>
+    <string name="fragment_c_i_label_gender">Пол</string>
+    <string name="fragment_c_i_label_address">Адрес</string>
+    <string name="fragment_c_i_label_telephone">Телефон</string>
+    <!--    -->
+
+    <!--    Fragment list_department-->
+    <string name="fragment_list_department_label_title1">Запись на прием</string>
+    <string name="fragment_list_department_label_title2">Выберите необходимое отделение</string>
+    <string name="fragment_list_department_label_therapeutic"><u>Терапевтическое отделение</u></string>
+    <string name="fragment_list_department_label_orthopedic"><u>Ортопедическое отделение</u></string>
+    <string name="fragment_list_department_label_LPO"><u>ЛПО</u></string>
+    <string name="fragment_list_department_label_orthopedicLPO"><u>Ортопедия ЛПО</u></string>
+    <string name="fragment_list_department_label_surgery"><u>Хирургическое отделение</u></string>
+    <string name="fragment_list_department_label_LOR"><u>ЛОР</u></string>
+
+
+    <!--    TAG-->
+    <string name="tag_patient_activity_UI">Уникальный идентификатор</string>
+    <string name="tag_patient_activity_FIO">ФИО клиента</string>
+    <string name="tag_window_x_rays">Снимки рентгена</string>
+    <string name="tag_window_pictures_visit">Фото приема</string>
+    <string name="tag_view_photo_title_x_rays">Снимок</string>
+    <string name="tag_view_photo_title_pictures">Фото</string>
+    <!--    -->
+
+    <!--    SharedPreferences-->
+    <string name="sh_file_settings">Файл настроек</string>
+    <string name="sh_patient_ui">Уникальный идентификатор пациента</string>
+    <string name="sh_patient_fio">ФИО пациента</string>
+    <!--    -->
+</resources>

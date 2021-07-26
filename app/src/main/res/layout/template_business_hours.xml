@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_margin="10dp"
+    android:background="@android:drawable/editbox_background"
+    >
+
+    <TextView
+        android:id="@+id/id_bh_edit_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+
+        android:gravity="center"
+        android:hint="@string/template_business_hours_time"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+</LinearLayout>

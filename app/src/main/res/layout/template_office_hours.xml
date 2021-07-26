@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/id_table_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    >
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/id_oh_edit_doctor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="0"
+            android:gravity="center"
+            android:hint="@string/template_office_hours_edit_doctor"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/id_oh_edit_profession"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="0"
+            android:gravity="center"
+            android:hint="@string/template_office_hours_edit_profession" />
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        >
+
+
+        <LinearLayout
+            android:layout_width="15dp"
+            android:layout_height="wrap_content"
+            android:layout_column="0"
+            android:gravity="center"
+            android:orientation="vertical"
+           >
+
+            <TextView
+                android:id="@+id/id_oh_edit_day_RC00"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/template_office_hours_edit_dey" />
+
+            <TextView
+                android:id="@+id/id_oh_edit_date_RC00"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/template_office_hours_edit_date" />
+
+            <TextView
+                android:id="@+id/id_oh_edit_reception_RC00"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/template_office_hours_edit_reception" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_column="1"
+            android:gravity="center"
+
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/id_oh_edit_day_RC01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/template_office_hours_edit_dey" />
+
+            <TextView
+                android:id="@+id/id_oh_edit_date_RC01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/template_office_hours_edit_date" />
+
+            <TextView
+                android:id="@+id/id_oh_edit_reception_RC01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/template_office_hours_edit_reception" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_column="2"
+
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/id_oh_edit_day_RC02"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/template_office_hours_edit_dey" />
+
+            <TextView
+                android:id="@+id/id_oh_edit_date_RC02"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/template_office_hours_edit_date" />
+
+            <TextView
+                android:id="@+id/id_oh_edit_reception_RC02"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/template_office_hours_edit_reception" />
+
+
+        </LinearLayout>
+
+    </TableRow>
+
+    <!--    ////////////////////-->
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="5dp">
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_column="0"
+            android:gravity="center"
+
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/id_oh_edit_day_RC10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/template_office_hours_edit_dey" />
+
+            <TextView
+                android:id="@+id/id_oh_edit_date_RC10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/template_office_hours_edit_date" />
+
+            <TextView
+                android:id="@+id/id_oh_edit_reception_RC10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/template_office_hours_edit_reception" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_column="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/id_oh_edit_day_RC11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/template_office_hours_edit_dey" />
+
+            <TextView
+                android:id="@+id/id_oh_edit_date_RC11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/template_office_hours_edit_date" />
+
+            <TextView
+                android:id="@+id/id_oh_edit_reception_RC11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/template_office_hours_edit_reception" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_column="2"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/id_oh_edit_day_RC22"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/template_office_hours_edit_dey" />
+
+            <TextView
+                android:id="@+id/id_oh_edit_date_RC22"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/template_office_hours_edit_date" />
+
+            <TextView
+                android:id="@+id/id_oh_edit_reception_RC22"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/template_office_hours_edit_reception" />
+
+
+        </LinearLayout>
+
+    </TableRow>
+
+
+</TableLayout>

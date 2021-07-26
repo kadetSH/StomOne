@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:background="@android:drawable/editbox_background">
+
+    <TextView
+        android:id="@+id/template_pictures_visit_label_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginStart="4dp"
+        android:text="@string/template_pictures_visit_label_date"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/template_pictures_visit_edit_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:layout_marginStart="8dp"
+        android:hint="@string/template_pictures_visit_label_date"
+        app:layout_constraintBottom_toBottomOf="@id/template_pictures_visit_label_date"
+        app:layout_constraintStart_toEndOf="@id/template_pictures_visit_label_date" />
+
+    <TextView
+        android:id="@+id/template_pictures_visit_label_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:text="@string/template_pictures_visit_label_number"
+        app:layout_constraintBottom_toBottomOf="@id/template_pictures_visit_edit_date"
+        app:layout_constraintStart_toEndOf="@id/template_pictures_visit_edit_date" />
+
+    <TextView
+        android:id="@+id/template_pictures_visit_edit_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:layout_marginStart="8dp"
+        android:hint="@string/template_pictures_visit_label_number"
+        app:layout_constraintBottom_toBottomOf="@id/template_pictures_visit_label_number"
+        app:layout_constraintStart_toEndOf="@id/template_pictures_visit_label_number" />
+
+    <TextView
+        android:id="@+id/template_pictures_visit_label_doctor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:text="@string/template_pictures_visit_label_doctor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/template_pictures_visit_label_date"
+        app:layout_constraintTop_toBottomOf="@id/template_pictures_visit_label_date" />
+
+    <TextView
+        android:id="@+id/template_pictures_visit_edit_doctor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:hint="@string/template_pictures_visit_label_doctor"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@id/template_pictures_visit_label_doctor"
+        app:layout_constraintStart_toEndOf="@id/template_pictures_visit_label_doctor" />
+
+    <ImageView
+        android:id="@+id/template_pictures_visit_loader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/template_pictures_visit_edit_doctor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/download_24"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>

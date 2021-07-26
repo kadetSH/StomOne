@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:background="@android:drawable/editbox_background">
+
+    <TextView
+        android:id="@+id/template_contract_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="center"
+        android:hint="@string/template_contracts_contracts_number"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/template_contract_label_data"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginTop="12dp"
+        android:text="@string/template_contracts_label_date"
+        app:layout_constraintStart_toStartOf="@id/template_contract_title"
+        app:layout_constraintTop_toBottomOf="@id/template_contract_title" />
+
+    <TextView
+        android:id="@+id/template_contract_edit_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:hint="@string/template_contracts_label_date"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@id/template_contract_label_data"
+        app:layout_constraintStart_toEndOf="@id/template_contract_label_data" />
+
+    <CheckBox
+        android:id="@+id/template_contract_check_box"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="26dp"
+        android:enabled="false"
+        android:text="@string/template_contracts_label_finish"
+        app:layout_constraintStart_toEndOf="@id/template_contract_edit_data"
+        app:layout_constraintTop_toBottomOf="@+id/template_contract_title" />
+
+    <TextView
+        android:id="@+id/template_contract_label_doctor"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginTop="18dp"
+        android:text="@string/template_contracts_label_doctor"
+        app:layout_constraintStart_toStartOf="@id/template_contract_label_data"
+        app:layout_constraintTop_toBottomOf="@id/template_contract_label_data" />
+
+    <TextView
+        android:id="@+id/template_contract_edit_doctor"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="8dp"
+        android:hint="@string/template_contracts_label_doctor"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/template_contract_label_doctor"
+        app:layout_constraintTop_toTopOf="@+id/template_contract_label_doctor" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
