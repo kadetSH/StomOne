@@ -43,7 +43,6 @@ class PicturesVisitViewModel @Inject constructor(application: Application) :
 
     @SuppressLint("CheckResult")
     fun loadPicturesVisitList(patientUI: String){
-
         try {
             Observable.just(repository.readAllPicturesVisit())
                 .subscribeOn(Schedulers.io())

@@ -13,7 +13,7 @@ import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_list_department.*
 import javax.inject.Inject
 
-class ListDepartmentFragment: DaggerFragment()  {
+class ListDepartmentFragment : DaggerFragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -52,7 +52,7 @@ class ListDepartmentFragment: DaggerFragment()  {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         arguments?.let { arg ->
-            patientUI = arg.getString("patientUI")
+            patientUI = arg.getString(requireContext().resources.getString(R.string.key_patient_ui))
         }
         (activity as? ListDepartmentFragment.SetTitleIsFragment)?.setTitleIsListDepartment(
             requireContext().resources.getString(R.string.drawer_menu_schedule)
@@ -61,11 +61,11 @@ class ListDepartmentFragment: DaggerFragment()  {
 
     }
 
-    interface OnClickViewDepartment{
+    interface OnClickViewDepartment {
         fun onClickDepartment(name: String)
     }
 
-    private fun initButtClick(){
+    private fun initButtClick() {
         buttTherapeutic = fragment_list_department_label_therapeutic
         buttOrthopedic = fragment_list_department_label_orthopedic
         buttLPO = fragment_list_department_label_LPO
@@ -73,21 +73,22 @@ class ListDepartmentFragment: DaggerFragment()  {
         buttSurgery = fragment_list_department_label_surgery
         buttLOR = fragment_list_department_label_LOR
 
-
         buttTherapeutic?.setOnClickListener {
-            context?.resources?.getString(R.string.fragment_list_department_label_therapeutic)?.let { it1 ->
-                (activity as? ListDepartmentFragment.OnClickViewDepartment)?.onClickDepartment(
-                    it1
-                )
-            }
+            context?.resources?.getString(R.string.fragment_list_department_label_therapeutic)
+                ?.let { it1 ->
+                    (activity as? ListDepartmentFragment.OnClickViewDepartment)?.onClickDepartment(
+                        it1
+                    )
+                }
         }
 
         buttOrthopedic?.setOnClickListener {
-            context?.resources?.getString(R.string.fragment_list_department_label_orthopedic)?.let { it1 ->
-                (activity as? ListDepartmentFragment.OnClickViewDepartment)?.onClickDepartment(
-                    it1
-                )
-            }
+            context?.resources?.getString(R.string.fragment_list_department_label_orthopedic)
+                ?.let { it1 ->
+                    (activity as? ListDepartmentFragment.OnClickViewDepartment)?.onClickDepartment(
+                        it1
+                    )
+                }
         }
 
         buttLPO?.setOnClickListener {
@@ -99,19 +100,21 @@ class ListDepartmentFragment: DaggerFragment()  {
         }
 
         buttOrthopedicLPO?.setOnClickListener {
-            context?.resources?.getString(R.string.fragment_list_department_label_orthopedicLPO)?.let { it1 ->
-                (activity as? ListDepartmentFragment.OnClickViewDepartment)?.onClickDepartment(
-                    it1
-                )
-            }
+            context?.resources?.getString(R.string.fragment_list_department_label_orthopedicLPO)
+                ?.let { it1 ->
+                    (activity as? ListDepartmentFragment.OnClickViewDepartment)?.onClickDepartment(
+                        it1
+                    )
+                }
         }
 
         buttSurgery?.setOnClickListener {
-            context?.resources?.getString(R.string.fragment_list_department_label_surgery)?.let { it1 ->
-                (activity as? ListDepartmentFragment.OnClickViewDepartment)?.onClickDepartment(
-                    it1
-                )
-            }
+            context?.resources?.getString(R.string.fragment_list_department_label_surgery)
+                ?.let { it1 ->
+                    (activity as? ListDepartmentFragment.OnClickViewDepartment)?.onClickDepartment(
+                        it1
+                    )
+                }
         }
 
         buttLOR?.setOnClickListener {
@@ -126,6 +129,5 @@ class ListDepartmentFragment: DaggerFragment()  {
     interface SetTitleIsFragment {
         fun setTitleIsListDepartment(titleIsFragment: String)
     }
-
 
 }

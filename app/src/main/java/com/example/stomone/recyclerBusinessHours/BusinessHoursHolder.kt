@@ -18,8 +18,6 @@ class BusinessHoursHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         }else{
             timeTitle.setBackgroundColor(Color.GRAY)
         }
-
-
     }
 
 }

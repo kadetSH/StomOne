@@ -14,9 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.stomone.R
 import com.example.stomone.recyclerPicturesVisit.PicturesVisitAdapter
 import com.example.stomone.recyclerPicturesVisit.PicturesVisitItem
-import com.example.stomone.recyclerXRays.XRaysItem
 import com.example.stomone.room.RPicturesVisit
-import com.example.stomone.room.RXRays
 import com.example.stomone.viewmodels.PicturesVisitViewModel
 import dagger.android.support.DaggerFragment
 import io.reactivex.Observable
@@ -24,7 +22,7 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_pictures_visit.*
 import javax.inject.Inject
 
-class PicturesVisitFragment: DaggerFragment()  {
+class PicturesVisitFragment : DaggerFragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -43,10 +41,10 @@ class PicturesVisitFragment: DaggerFragment()  {
     }
 
     var patientUI: String? = null
-    private var recyclerView : RecyclerView? = null
-    private var adapter : PicturesVisitAdapter? = null
+    private var recyclerView: RecyclerView? = null
+    private var adapter: PicturesVisitAdapter? = null
     private var list = ArrayList<PicturesVisitItem>()
-    var btm : Bitmap? = null
+    var btm: Bitmap? = null
     lateinit var anima: View
     private lateinit var starAnim: Animation
 
@@ -62,7 +60,7 @@ class PicturesVisitFragment: DaggerFragment()  {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         arguments?.let { arg ->
-            patientUI = arg.getString("patientUI")
+            patientUI = arg.getString(requireContext().resources.getString(R.string.key_patient_ui))
         }
         (activity as? PicturesVisitFragment.SetTitleIsFragment)?.setTitleIsPicturesVisit(
             requireContext().resources.getString(R.string.drawer_menu_pictures_visit)
@@ -118,7 +116,11 @@ class PicturesVisitFragment: DaggerFragment()  {
             viewLifecycleOwner,
             androidx.lifecycle.Observer<Bitmap> { result ->
                 btm = result
-                btm?.let { (activity as? PicturesVisitFragment.OnClickViewPicturesVisit)?.onViewPicturesVisit(it) }
+                btm?.let {
+                    (activity as? PicturesVisitFragment.OnClickViewPicturesVisit)?.onViewPicturesVisit(
+                        it
+                    )
+                }
 
             })
     }
@@ -128,7 +130,7 @@ class PicturesVisitFragment: DaggerFragment()  {
         adapter = PicturesVisitAdapter(
             LayoutInflater.from(requireContext()),
             list
-        ){itemPictures: PicturesVisitItem ->
+        ) { itemPictures: PicturesVisitItem ->
             viewModel.loadPicturesVisit(itemPictures)
         }
         recyclerView = id_recyclerView_pictures_visit
@@ -151,7 +153,7 @@ class PicturesVisitFragment: DaggerFragment()  {
         Toast.makeText(context, message, Toast.LENGTH_LONG).show()
     }
 
-    interface OnClickViewPicturesVisit{
+    interface OnClickViewPicturesVisit {
         fun onViewPicturesVisit(btm: Bitmap)
     }
 

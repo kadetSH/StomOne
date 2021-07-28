@@ -10,7 +10,6 @@ import com.example.stomone.jsonMy.PatientUIjs
 import com.example.stomone.room.LoginDatabase
 import com.example.stomone.room.LoginRepository
 import com.example.stomone.room.RRadiationDose
-import com.example.stomone.room.RXRays
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 import java.io.IOException
@@ -27,6 +26,7 @@ class RadiationDoseViewModel @Inject constructor(application: Application) :
 
     val readAllRadiationDoseLiveData: LiveData<List<RRadiationDose>>
     private val repository: LoginRepository
+
     init {
         val loginDao = LoginDatabase.getLoginDatabase(application).filmDao()
         repository = LoginRepository(loginDao)
@@ -38,8 +38,7 @@ class RadiationDoseViewModel @Inject constructor(application: Application) :
     }
 
     @SuppressLint("CheckResult")
-    fun loadRadiationDoseList(patientUI: String){
-
+    fun loadRadiationDoseList(patientUI: String) {
         try {
             Observable.just(repository.readAllRadiationDose())
                 .subscribeOn(Schedulers.io())
@@ -59,11 +58,10 @@ class RadiationDoseViewModel @Inject constructor(application: Application) :
             _booleanAnimation.postValue(false)
             _toastMessage.postValue(e.toString())
         }
-
     }
 
     @SuppressLint("CheckResult")
-    private fun loadInformationIsServer(patientUI: String){
+    private fun loadInformationIsServer(patientUI: String) {
         val JSON = PatientUIjs(patientUI)
         App.instance.api.patientRadiationDoseRequest(JSON)
             .subscribeOn(Schedulers.io())
@@ -75,7 +73,16 @@ class RadiationDoseViewModel @Inject constructor(application: Application) :
             .subscribe(
                 { result ->
                     result.forEach { items ->
-                        repository.addRadiationDose(RRadiationDose(0, items.date, items.teeth, items.typeOfResearch, items.radiationDose, items.doctor))
+                        repository.addRadiationDose(
+                            RRadiationDose(
+                                0,
+                                items.date,
+                                items.teeth,
+                                items.typeOfResearch,
+                                items.radiationDose,
+                                items.doctor
+                            )
+                        )
                     }
                     _booleanAnimation.postValue(false)
                 },

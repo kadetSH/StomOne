@@ -14,10 +14,8 @@ class PicturesVisitViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView
     var loader: ImageView = itemView.findViewById<ImageView>(R.id.template_pictures_visit_loader)
 
     fun bind(item: PicturesVisitItem) {
-
         dateOfReceipt.text = item.dateOfReceipt
         numberPicture.text = item.numberPicture
         doctor.text = item.doctor
-
     }
 }

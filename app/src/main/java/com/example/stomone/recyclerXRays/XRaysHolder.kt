@@ -23,7 +23,6 @@ class XRaysHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         editFinancing.text = item.financing
         editTeeth.text = item.teeth
         editDoctor.text = item.doctor
-
     }
 
 }

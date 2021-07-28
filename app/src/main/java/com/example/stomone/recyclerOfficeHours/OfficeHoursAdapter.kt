@@ -1,11 +1,9 @@
 package com.example.stomone.recyclerOfficeHours
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.stomone.R
-import com.example.stomone.recyclerXRays.XRaysItem
 
 class OfficeHoursAdapter(
     private val layoutInflater: LayoutInflater,

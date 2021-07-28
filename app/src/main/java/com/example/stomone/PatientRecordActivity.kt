@@ -11,8 +11,10 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.FragmentManager
 import com.example.stomone.fragments.*
 import com.example.stomone.recyclerOfficeHours.OfficeHoursItem
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.crashlytics.FirebaseCrashlytics
+import com.google.firebase.messaging.FirebaseMessaging
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_patient_record.*
 import kotlinx.android.synthetic.main.activity_patient_record.drawer_layout
@@ -32,10 +34,9 @@ class PatientRecordActivity : DaggerAppCompatActivity(),
     RadiationDoseFragment.SetTitleIsFragment,
     AppointmentFragment.SetTitleIsFragment,
     ListDepartmentFragment.SetTitleIsFragment,
-        OfficeHoursFragment.SetTitleIsFragment,
-        BusinessHoursFragment.SetTitleIsFragment,
-        ViewPhotoFragment.OnBackPressedFromViewPhoto
-{
+    OfficeHoursFragment.SetTitleIsFragment,
+    BusinessHoursFragment.SetTitleIsFragment,
+    ViewPhotoFragment.OnBackPressedFromViewPhoto {
 
     private var patientUI = ""
 
@@ -83,8 +84,26 @@ class PatientRecordActivity : DaggerAppCompatActivity(),
             resources.getString(R.string.tag_view_photo_title_pictures) -> {
                 openPicturesVisit()
             }
+            resources.getString(R.string.fragment_list_department_label_therapeutic) -> {
+                openViewSchedule()
+            }
+            resources.getString(R.string.fragment_list_department_label_orthopedic) -> {
+                openViewSchedule()
+            }
+            resources.getString(R.string.fragment_list_department_label_LPO) -> {
+                openViewSchedule()
+            }
+            resources.getString(R.string.fragment_list_department_label_orthopedicLPO) -> {
+                openViewSchedule()
+            }
+            resources.getString(R.string.fragment_list_department_label_surgery) -> {
+                openViewSchedule()
+            }
+            resources.getString(R.string.fragment_list_department_label_LOR) -> {
+                openViewSchedule()
+            }
             else -> {
-                super.onBackPressed()
+                drawer_layout.openDrawer(GravityCompat.START)
             }
         }
     }

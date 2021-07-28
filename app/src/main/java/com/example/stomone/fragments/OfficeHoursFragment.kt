@@ -41,13 +41,8 @@ class OfficeHoursFragment : DaggerFragment() {
     private var recyclerView: RecyclerView? = null
     private var adapter: OfficeHoursAdapter? = null
     private var list = ArrayList<OfficeHoursItem>()
-
     lateinit var anima: View
     private lateinit var starAnim: Animation
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -61,7 +56,7 @@ class OfficeHoursFragment : DaggerFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         arguments?.let { arg ->
-            department = arg.getString("department")
+            department = arg.getString(requireContext().resources.getString(R.string.key_department))
         }
         department?.let { depart ->
             (activity as? OfficeHoursFragment.SetTitleIsFragment)?.setTitleIsOfficeHours(
@@ -77,7 +72,7 @@ class OfficeHoursFragment : DaggerFragment() {
         requestOfficeHoursList()
     }
 
-    private fun initAnimationView(){
+    private fun initAnimationView() {
         starAnim = android.view.animation.AnimationUtils.loadAnimation(this.context, R.anim.turn)
         anima = requireActivity().findViewById(R.id.id_office_hours_anim)
     }
@@ -110,8 +105,7 @@ class OfficeHoursFragment : DaggerFragment() {
             viewLifecycleOwner,
             androidx.lifecycle.Observer<ArrayList<OfficeHoursJS>> { itemOfficeHoursJS ->
                 list.clear()
-
-                var check : Boolean = false
+                var check: Boolean = false
                 itemOfficeHoursJS.forEach { item ->
                     check = true
                     val doctorFIO: String = item.doctor
@@ -162,7 +156,7 @@ class OfficeHoursFragment : DaggerFragment() {
 
                 }
                 recyclerView?.adapter?.notifyDataSetChanged()
-                if (check){
+                if (check) {
                     viewModel.isAnimation(false)
                 }
 
@@ -174,8 +168,13 @@ class OfficeHoursFragment : DaggerFragment() {
         adapter = OfficeHoursAdapter(
             LayoutInflater.from(requireContext()),
             list
-        ){officeHoursItem: OfficeHoursItem, position: Int, date: String, reception: String ->
-            (activity as? OfficeHoursFragment.OnOfficeHoursClickListener)?.onOfficeClick(officeHoursItem, position, date, reception)
+        ) { officeHoursItem: OfficeHoursItem, position: Int, date: String, reception: String ->
+            (activity as? OfficeHoursFragment.OnOfficeHoursClickListener)?.onOfficeClick(
+                officeHoursItem,
+                position,
+                date,
+                reception
+            )
         }
         recyclerView = id_recyclerView_office_hours
         recyclerView?.layoutManager = layoutManager
@@ -187,7 +186,12 @@ class OfficeHoursFragment : DaggerFragment() {
     }
 
     interface OnOfficeHoursClickListener {
-        fun onOfficeClick(officeHoursItem: OfficeHoursItem, position: Int, date: String, reception: String)
+        fun onOfficeClick(
+            officeHoursItem: OfficeHoursItem,
+            position: Int,
+            date: String,
+            reception: String
+        )
     }
 
     interface SetTitleIsFragment {

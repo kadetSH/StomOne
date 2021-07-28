@@ -14,7 +14,7 @@
         android:id="@+id/toolbarActivation"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:background="@android:drawable/divider_horizontal_bright"
+        android:background="@android:color/holo_green_light"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme">
 
@@ -23,8 +23,8 @@
             android:layout_width="80dp"
             android:layout_height="match_parent"
             android:contentDescription="@string/iconDent"
-            android:foreground="@drawable/logo"
-            tools:srcCompat="@drawable/logo" />
+            android:foreground="@drawable/logo0"
+            tools:srcCompat="@drawable/logo0" />
 
         <TextView
             android:layout_width="match_parent"
@@ -35,8 +35,7 @@
             android:text="@string/authorization_polyclinic_name"
             android:textColor="@color/black"
             android:textSize="20sp"
-            android:textStyle="bold"
-            />
+            android:textStyle="bold" />
     </androidx.appcompat.widget.Toolbar>
 
     <FrameLayout

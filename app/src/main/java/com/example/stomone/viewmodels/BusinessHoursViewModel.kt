@@ -10,13 +10,8 @@ import com.example.stomone.R
 import com.example.stomone.SingleLiveEvent
 import com.example.stomone.jsonMy.*
 import com.example.stomone.recyclerBusinessHours.BusinessHoursItem
-import com.example.stomone.room.LoginDatabase
-import com.example.stomone.room.LoginRepository
-import com.example.stomone.room.RPicturesVisit
 import io.reactivex.schedulers.Schedulers
-import io.vertx.ext.web.client.predicate.ResponsePredicate.JSON
 import javax.inject.Inject
-import kotlin.coroutines.coroutineContext
 
 class BusinessHoursViewModel @Inject constructor(application: Application) :
     AndroidViewModel(application) {
@@ -30,13 +25,6 @@ class BusinessHoursViewModel @Inject constructor(application: Application) :
     private var _listBusinessHours = SingleLiveEvent<ArrayList<BusinessHoursResultJS>>()
     val listBusinessHours: LiveData<ArrayList<BusinessHoursResultJS>> get() = _listBusinessHours
 
-//    private val repository: LoginRepository
-//    init {
-//        val loginDao = LoginDatabase.getLoginDatabase(application).filmDao()
-//        repository = LoginRepository(loginDao)
-//
-//    }
-
     @SuppressLint("CheckResult")
     fun loadBusinessHoursIsServer(
         doctorRequest: String,
@@ -47,7 +35,6 @@ class BusinessHoursViewModel @Inject constructor(application: Application) :
         App.instance.api.businessHoursRequest(JSON)
             .subscribeOn(Schedulers.io())
             .doOnError {
-                println("")
                 _toastMessage.postValue(it.toString())
             }
             .subscribeOn(Schedulers.newThread())
@@ -56,7 +43,6 @@ class BusinessHoursViewModel @Inject constructor(application: Application) :
                     _listBusinessHours.postValue(result)
                 },
                 { error ->
-                    println("")
                     _toastMessage.postValue(error.toString())
                 }
             )

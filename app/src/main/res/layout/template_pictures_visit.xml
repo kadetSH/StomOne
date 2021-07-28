@@ -73,10 +73,8 @@
         android:id="@+id/template_pictures_visit_loader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginStart="12dp"
         app:layout_constraintBottom_toBottomOf="@+id/template_pictures_visit_edit_doctor"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/download_24"
-        />
+        app:layout_constraintStart_toEndOf="@+id/template_pictures_visit_edit_doctor"
+        app:srcCompat="@drawable/download_24" />
 </androidx.constraintlayout.widget.ConstraintLayout>

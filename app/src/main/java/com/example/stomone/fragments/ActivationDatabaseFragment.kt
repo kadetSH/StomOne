@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
 import android.widget.*
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -14,6 +15,8 @@ import com.example.stomone.room.RLogin
 import com.example.stomone.viewmodels.ActivationDatabaseViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.android.support.DaggerFragment
+import io.reactivex.Observable
+import io.reactivex.schedulers.Schedulers
 import java.io.Serializable
 import javax.inject.Inject
 
@@ -39,10 +42,6 @@ class ActivationDatabaseFragment : DaggerFragment() {
 
     private var btnFab: FloatingActionButton? = null
     private var btnEnter: Button? = null
-//    private val btnEnter by lazy {
-//        requireActivity().findViewById(R.id.enterBase) as Button
-//    }
-
     private val surnameFilds by lazy {
         requireActivity().findViewById(R.id.auth_editTextSurname) as TextView
     }
@@ -55,16 +54,13 @@ class ActivationDatabaseFragment : DaggerFragment() {
     private val passwordFilds by lazy {
         requireActivity().findViewById(R.id.auth_editTextTextPassword) as TextView
     }
-
     var autoCompleteLogin: AutoCompleteTextView? = null
-
-    //    private val autoCompleteLogin by lazy {
-//        requireActivity().findViewById(R.id.autoCompleteLogin) as AutoCompleteTextView
-//    }
     private var adapterMenu: ArrayAdapter<String>? = null
     private var listener: ActivationClickListener? = null
     var loginItem: LoginItem? = null
     var listLogin = ArrayList<String>()
+    lateinit var anima: View
+    private lateinit var starAnim: Animation
 
 
     @Suppress("DEPRECATION")
@@ -78,7 +74,6 @@ class ActivationDatabaseFragment : DaggerFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-//        loginItem = arguments?.getSerializable("login") as LoginItem
         return inflater.inflate(
             R.layout.fragment_activation_database, container, false
         )
@@ -86,7 +81,7 @@ class ActivationDatabaseFragment : DaggerFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         arguments?.let { arg ->
-            loginItem = arg.getSerializable("login") as LoginItem
+            loginItem = arg.getSerializable(requireContext().resources.getString(R.string.key_login)) as LoginItem
         }
         if (activity is ActivationClickListener) {
             listener = activity as ActivationClickListener
@@ -100,8 +95,25 @@ class ActivationDatabaseFragment : DaggerFragment() {
             patronymicFilds.text = loginItem?.patronymicFilds
             passwordFilds.text = loginItem?.passwordFilds
         }
+        initAnimationView()
         observeViewModel()
         initListLogin(view)
+    }
+
+    private fun initAnimationView() {
+        starAnim = android.view.animation.AnimationUtils.loadAnimation(this.context, R.anim.turn)
+        anima = requireActivity().findViewById(R.id.id_activation_anim)
+    }
+
+    private fun animation(bool: Boolean) {
+        if (bool) {
+            anima.visibility = View.VISIBLE
+            anima.startAnimation(starAnim)
+        } else {
+            anima.visibility = View.INVISIBLE
+            starAnim.cancel()
+            anima.clearAnimation()
+        }
     }
 
     private fun initButton() {
@@ -129,7 +141,6 @@ class ActivationDatabaseFragment : DaggerFragment() {
                 val id = strArray[0].toInt()
                 requestLoginIsRoom(id)
             } catch (ex: Exception) {
-                println("")
             }
         }
     }
@@ -139,7 +150,6 @@ class ActivationDatabaseFragment : DaggerFragment() {
     }
 
     private fun observeViewModel() {
-
         viewModel.toastMessage.observe(
             viewLifecycleOwner,
             androidx.lifecycle.Observer<String> { message ->
@@ -153,6 +163,14 @@ class ActivationDatabaseFragment : DaggerFragment() {
                 }
             })
 
+        viewModel.booleanAnimation.observe(
+            viewLifecycleOwner,
+            androidx.lifecycle.Observer<Boolean> { bool ->
+                Observable.just(animation(bool))
+                    .observeOn(Schedulers.newThread())
+                    .subscribe()
+            })
+
         viewModel.universalIdentifier.observe(
             viewLifecycleOwner,
             androidx.lifecycle.Observer<String> { ui ->
@@ -162,7 +180,6 @@ class ActivationDatabaseFragment : DaggerFragment() {
         viewModel.readAllLogin.observe(viewLifecycleOwner, Observer<List<RLogin>> { result ->
             listLogin.clear()
             result.forEach { itemRoom ->
-                println("")
                 val strSpinner =
                     "${itemRoom.id} - ${itemRoom.surname} ${itemRoom.name} ${itemRoom.patronymic}"
                 listLogin.add(strSpinner)

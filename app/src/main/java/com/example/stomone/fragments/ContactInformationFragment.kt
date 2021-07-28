@@ -16,10 +16,7 @@ import com.example.stomone.viewmodels.ContactInformationViewModel
 import dagger.android.support.DaggerFragment
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.fragment_contact_information.*
-import kotlinx.coroutines.coroutineScope
 import javax.inject.Inject
-import kotlin.coroutines.coroutineContext
 
 @Suppress("UNREACHABLE_CODE")
 class ContactInformationFragment : DaggerFragment() {
@@ -29,7 +26,6 @@ class ContactInformationFragment : DaggerFragment() {
     private val viewModel: ContactInformationViewModel by viewModels {
         viewModelFactory
     }
-
 
     companion object {
         fun newInstance(patientUI: String?): ContactInformationFragment {
@@ -62,26 +58,7 @@ class ContactInformationFragment : DaggerFragment() {
     private val editAddress by lazy {
         requireActivity().findViewById(R.id.contact_editAddress) as TextView
     }
-
-//    private var editSurname: TextView? = null
-////    private lateinit var editName: TextView
-//    private lateinit var editPatronymic: TextView
-//    private lateinit var editBirth: TextView
-//    private lateinit var editGender: TextView
-//    private lateinit var editTelephone: TextView
-//    private lateinit var editAddress: TextView
-
-
     var patientUI: String? = null
-
-    @Suppress("DEPRECATION")
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-//        retainInstance = true
-        println(activity.hashCode().toString())
-        Log.d("Proverka", activity.hashCode().toString())
-    }
-
     lateinit var anima: View
     private lateinit var starAnim: Animation
 
@@ -90,8 +67,6 @@ class ContactInformationFragment : DaggerFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-
         return inflater.inflate(
             R.layout.fragment_contact_information, container, false
         )
@@ -99,18 +74,13 @@ class ContactInformationFragment : DaggerFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         arguments?.let { arg ->
-            patientUI = arg.getString("patientUI")
+            patientUI = arg.getString(requireContext().resources.getString(R.string.key_patient_ui))
         }
-
         (activity as? ContactInformationFragment.SetTitleIsFragment)?.setTitleIsContactInformation(
             requireContext().resources.getString(R.string.drawer_menu_contact_information)
         )
-
-
         initAnimationView()
         viewModel.isAnimation(true)
-
-//        initTextView()
         observeViewModel()
         loadPatientInfo()
     }
@@ -119,17 +89,6 @@ class ContactInformationFragment : DaggerFragment() {
         starAnim = android.view.animation.AnimationUtils.loadAnimation(this.context, R.anim.turn)
         anima = requireActivity().findViewById(R.id.id_contact_info_anim)
     }
-
-//    private fun initTextView() {
-//        editSurname = requireActivity().findViewById(R.id.contact_editSurname)
-////        editName = requireActivity().findViewById(R.id.contact_editName)
-//        editPatronymic = requireActivity().findViewById(R.id.contact_editPatronymic)
-//        editBirth = requireActivity().findViewById(R.id.contact_editBirth)
-//        editGender = requireActivity().findViewById(R.id.contact_editGender)
-//        editTelephone = requireActivity().findViewById(R.id.contact_editTelephone)
-//        editAddress = requireActivity().findViewById(R.id.contact_editAddress)
-//    }
-
 
     private fun observeViewModel() {
 
@@ -142,19 +101,9 @@ class ContactInformationFragment : DaggerFragment() {
         viewModel.booleanAnimation.observe(
             viewLifecycleOwner,
             androidx.lifecycle.Observer<Boolean> { bool ->
-
                 Observable.just(animation(bool))
                     .observeOn(Schedulers.newThread())
                     .subscribe()
-
-//                if (bool == true) {
-//                    anima.visibility = View.VISIBLE
-//                    anima.startAnimation(starAnim)
-//                } else {
-//                    anima.visibility = View.INVISIBLE
-////                    starAnim.cancel()
-//                    anima.clearAnimation()
-//                }
             })
 
         viewModel.readAllContractInfoLiveData.observe(
@@ -169,12 +118,8 @@ class ContactInformationFragment : DaggerFragment() {
                     editTelephone.text = patientInfo.telephone
                     editAddress.text = patientInfo.address
                     viewModel.isAnimation(false)
-                    Log.d("Proverka", editName.hashCode().toString() + " -- edit name")
                 }
-
-
             })
-
     }
 
     private fun animation(bool: Boolean) {
@@ -199,6 +144,5 @@ class ContactInformationFragment : DaggerFragment() {
     interface SetTitleIsFragment {
         fun setTitleIsContactInformation(title: String)
     }
-
 
 }

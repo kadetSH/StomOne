@@ -12,7 +12,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.*
 import java.util.concurrent.TimeUnit
 
-
 class App : DaggerApplication() {
 
     lateinit var api: Api

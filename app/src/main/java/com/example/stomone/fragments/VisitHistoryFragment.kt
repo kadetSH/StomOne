@@ -11,21 +11,17 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.stomone.R
-import com.example.stomone.recyclerContracts.ContractItem
-import com.example.stomone.recyclerContracts.ContractsAdapter
 import com.example.stomone.recyclerVisitHistory.VisitHistoryAdapter
 import com.example.stomone.recyclerVisitHistory.VisitHistoryItem
-import com.example.stomone.room.RContracts
 import com.example.stomone.room.RVisitHistory
 import com.example.stomone.viewmodels.VisitHistoryViewModel
 import dagger.android.support.DaggerFragment
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.fragment_contracts.*
 import kotlinx.android.synthetic.main.fragment_visit_history.*
 import javax.inject.Inject
 
-class VisitHistoryFragment: DaggerFragment() {
+class VisitHistoryFragment : DaggerFragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -44,15 +40,11 @@ class VisitHistoryFragment: DaggerFragment() {
     }
 
     var patientUI: String? = null
-    private var recyclerView : RecyclerView? = null
-    private var adapter : VisitHistoryAdapter? = null
+    private var recyclerView: RecyclerView? = null
+    private var adapter: VisitHistoryAdapter? = null
     private var list = ArrayList<VisitHistoryItem>()
     lateinit var anima: View
     private lateinit var starAnim: Animation
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -66,7 +58,7 @@ class VisitHistoryFragment: DaggerFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         arguments?.let { arg ->
-            patientUI = arg.getString("patientUI")
+            patientUI = arg.getString(requireContext().resources.getString(R.string.key_patient_ui))
         }
 
         (activity as? VisitHistoryFragment.SetTitleIsFragment)?.setTitleIsVisitHistory(
@@ -133,11 +125,11 @@ class VisitHistoryFragment: DaggerFragment() {
                         )
                     )
                 }
-                if (list.size > 0){
+                if (list.size > 0) {
                     viewModel.isAnimation(false)
                 }
                 recyclerView?.adapter?.notifyDataSetChanged()
-    })
+            })
 
         viewModel.toastMessage.observe(
             viewLifecycleOwner,

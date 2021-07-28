@@ -22,7 +22,7 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_x_rays.*
 import javax.inject.Inject
 
-class XRaysFragment: DaggerFragment() {
+class XRaysFragment : DaggerFragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -41,10 +41,10 @@ class XRaysFragment: DaggerFragment() {
     }
 
     var patientUI: String? = null
-    private var recyclerView : RecyclerView? = null
-    private var adapter : XRaysAdapter? = null
+    private var recyclerView: RecyclerView? = null
+    private var adapter: XRaysAdapter? = null
     private var list = ArrayList<XRaysItem>()
-    var btm : Bitmap? = null
+    var btm: Bitmap? = null
     lateinit var anima: View
     private lateinit var starAnim: Animation
 
@@ -60,7 +60,7 @@ class XRaysFragment: DaggerFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         arguments?.let { arg ->
-            patientUI = arg.getString("patientUI")
+            patientUI = arg.getString(requireContext().resources.getString(R.string.key_patient_ui))
         }
         (activity as? XRaysFragment.SetTitleIsFragment)?.setTitleIsXRays(
             requireContext().resources.getString(R.string.drawer_menu_x_rays)
@@ -136,7 +136,7 @@ class XRaysFragment: DaggerFragment() {
         adapter = XRaysAdapter(
             LayoutInflater.from(requireContext()),
             list
-        ){xRaysItem: XRaysItem, position: Int ->
+        ) { xRaysItem: XRaysItem, position: Int ->
             (activity as? OnXRaysClickListener)?.onXRaysClick(xRaysItem, position)
             viewModel.loadImage(xRaysItem, position)
         }
@@ -157,7 +157,7 @@ class XRaysFragment: DaggerFragment() {
         fun onXRaysClick(xRaysItem: XRaysItem, position: Int)
     }
 
-    interface OnClickViewPhoto{
+    interface OnClickViewPhoto {
         fun onViewPhoto(btm: Bitmap)
     }
 

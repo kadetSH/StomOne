@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
 import android.widget.Button
 import android.widget.DatePicker
 import android.widget.TextView
@@ -15,6 +16,8 @@ import com.example.stomone.LoginItem
 import com.example.stomone.R
 import com.example.stomone.viewmodels.SetPasswordViewModel
 import dagger.android.support.DaggerFragment
+import io.reactivex.Observable
+import io.reactivex.schedulers.Schedulers
 import java.util.*
 import javax.inject.Inject
 
@@ -55,6 +58,8 @@ class SetPasswordFragment : DaggerFragment() {
     private val btnSetData by lazy {
         requireActivity().findViewById(R.id.idBtnSetData) as Button
     }
+    lateinit var anima: View
+    private lateinit var starAnim: Animation
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -69,11 +74,27 @@ class SetPasswordFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         btnSetPassword.setOnClickListener { checkFilds() }
         btnSetData.setOnClickListener { showDatePickerDialog(view) }
+        initAnimationView()
         observeViewModel()
     }
 
-    private fun observeViewModel() {
+    private fun initAnimationView() {
+        starAnim = android.view.animation.AnimationUtils.loadAnimation(this.context, R.anim.turn)
+        anima = requireActivity().findViewById(R.id.id_set_password_anim)
+    }
 
+    private fun animation(bool: Boolean) {
+        if (bool) {
+            anima.visibility = View.VISIBLE
+            anima.startAnimation(starAnim)
+        } else {
+            anima.visibility = View.INVISIBLE
+            starAnim.cancel()
+            anima.clearAnimation()
+        }
+    }
+
+    private fun observeViewModel() {
         viewModel.toastMessage.observe(
             viewLifecycleOwner,
             androidx.lifecycle.Observer<String> { message ->
@@ -86,6 +107,13 @@ class SetPasswordFragment : DaggerFragment() {
                 }
             })
 
+        viewModel.booleanAnimation.observe(
+            viewLifecycleOwner,
+            androidx.lifecycle.Observer<Boolean> { bool ->
+                Observable.just(animation(bool))
+                    .observeOn(Schedulers.newThread())
+                    .subscribe()
+            })
     }
 
     private fun showDatePickerDialog(view: View) {

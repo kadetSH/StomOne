@@ -20,6 +20,8 @@ class SetPasswordViewModel @Inject constructor(application: Application) :
     private var _toastMessage = SingleLiveEvent<String>()
     val toastMessage: LiveData<String> get() = _toastMessage
 
+    private var _booleanAnimation = SingleLiveEvent<Boolean>()
+    val booleanAnimation: LiveData<Boolean> get() = _booleanAnimation
 
     @SuppressLint("CheckResult")
     fun setPassword(
@@ -51,17 +53,19 @@ class SetPasswordViewModel @Inject constructor(application: Application) :
             return
         }
 
-//        val JSON = SearchKlient(surname, name, patronymic, telephone,  birth)
-        val JSON = SearchKlient("Гончаров", "Евгений", "Николаевич", "9803869901", "12.12.1986")
+        _booleanAnimation.postValue(true)
+        val JSON = SearchKlient(surname, name, patronymic, telephone,  birth)
 
         App.instance.api.passwordRequest(JSON)
             .subscribeOn(Schedulers.io())
             .doOnError {
+                _booleanAnimation.postValue(false)
                 _toastMessage.postValue(context.resources.getString(R.string.toast_password_error_request))
             }
             .subscribeOn(Schedulers.newThread())
             .subscribe(
                 { result ->
+                    _booleanAnimation.postValue(false)
                     if (result.result == context.resources.getString(R.string.toast_password_client_found)) {
                         _toastMessage.postValue(context.resources.getString(R.string.toast_password_sent))
                     } else {
@@ -69,10 +73,10 @@ class SetPasswordViewModel @Inject constructor(application: Application) :
                     }
                 },
                 { error ->
+                    _booleanAnimation.postValue(false)
                     _toastMessage.postValue(error.message)
                 }
             )
-
     }
 
 

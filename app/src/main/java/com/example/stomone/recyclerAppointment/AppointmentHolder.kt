@@ -4,7 +4,6 @@ import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.stomone.R
-import com.example.stomone.recyclerXRays.XRaysItem
 
 class AppointmentHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 

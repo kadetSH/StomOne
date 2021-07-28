@@ -4,8 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.stomone.R
-import com.example.stomone.recyclerPicturesVisit.PicturesVisitItem
-import com.example.stomone.recyclerPicturesVisit.PicturesVisitViewHolder
 
 class RadiationDoseAdapter(private val layoutInflater: LayoutInflater,
                            private val itemsArray: ArrayList<RadiationDoseItem>):  RecyclerView.Adapter<RadiationDoseViewHolder>() {

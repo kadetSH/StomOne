@@ -20,7 +20,6 @@ class PicturesVisitAdapter(private val layoutInflater: LayoutInflater,
         holder.loader.setOnClickListener {
             listener?.invoke(itemsArray[position])
         }
-
     }
 
     override fun getItemCount(): Int = itemsArray.size

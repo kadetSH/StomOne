@@ -13,14 +13,11 @@ class ContractsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var contractFinish: CheckBox = itemView.findViewById<CheckBox>(R.id.template_contract_check_box)
     var contractDoctor: TextView = itemView.findViewById<TextView>(R.id.template_contract_edit_doctor)
 
-
     fun bind(item: ContractItem) {
-
         contractTitle.text = item.contractTitle
         contractData.text = item.contractData
         contractFinish.isChecked = item.contractCheckBox
         contractDoctor.text = item.contractDoctor
-
     }
 
 }

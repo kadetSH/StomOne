@@ -4,7 +4,6 @@ import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.stomone.R
-import com.example.stomone.recyclerPicturesVisit.PicturesVisitItem
 
 class RadiationDoseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -21,6 +20,5 @@ class RadiationDoseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView
         typeOfResearch.text = item.typeOfResearch
         doctor.text = item.doctor
     }
-
 
 }

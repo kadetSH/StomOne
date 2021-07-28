@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Belstom1</string>
     <string name="iconDent">TODO</string>
-    <string name="authorization_polyclinic_name">Стоматологическая поликлиника №1 г. Белгорода</string>
+    <string name="authorization_polyclinic_name">Стоматологическая поликлиника №1 г.Белгорода</string>
     <string name="authorization_label">Авторизация в базе</string>
     <string name="authorization_hint_surname">Фамилия</string>
     <string name="authorization_hint_name">Имя</string>
@@ -155,7 +155,19 @@
 
     <!--    SharedPreferences-->
     <string name="sh_file_settings">Файл настроек</string>
+    <string name="sh_file_push">push message</string>
     <string name="sh_patient_ui">Уникальный идентификатор пациента</string>
     <string name="sh_patient_fio">ФИО пациента</string>
+    <!--    -->
+
+    <!--    Key-->
+    <string name="key_patient_ui">patientUI</string>
+    <string name="key_photo">photo</string>
+    <string name="key_window">window</string>
+    <string name="key_department">department</string>
+    <string name="key_doctorRequest">doctorRequest</string>
+    <string name="key_dateRequest">dateRequest</string>
+    <string name="key_periodOfTimeRequest">periodOfTimeRequest</string>
+    <string name="key_login">login</string>
     <!--    -->
 </resources>

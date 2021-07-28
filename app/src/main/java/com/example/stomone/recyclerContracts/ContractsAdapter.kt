@@ -8,8 +8,6 @@ import com.example.stomone.R
 class ContractsAdapter(private val layoutInflater: LayoutInflater,
                        private val itemsArray: ArrayList<ContractItem>):  RecyclerView.Adapter<ContractsViewHolder>() {
 
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContractsViewHolder {
         return ContractsViewHolder(layoutInflater.inflate(R.layout.template_contracts, parent, false))
     }
@@ -19,11 +17,5 @@ class ContractsAdapter(private val layoutInflater: LayoutInflater,
     }
 
     override fun getItemCount(): Int = itemsArray.size
-
-    fun setItems(rep : ArrayList<ContractItem>) {
-        itemsArray.clear()
-        itemsArray.addAll(rep)
-        notifyDataSetChanged()
-    }
 
 }

@@ -1,32 +1,19 @@
 package com.example.stomone.viewmodels
 
-import android.animation.AnimatorInflater
 import android.annotation.SuppressLint
 import android.app.Application
-import android.content.Context
-import android.view.View
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.viewModelScope
 import com.example.stomone.App
-import com.example.stomone.R
 import com.example.stomone.SingleLiveEvent
-import com.example.stomone.jsonMy.Authorization
-import com.example.stomone.jsonMy.PatientData
 import com.example.stomone.jsonMy.PatientUIjs
 import com.example.stomone.room.LoginDatabase
 import com.example.stomone.room.LoginRepository
 import com.example.stomone.room.RContactInformation
-import com.example.stomone.room.RLogin
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.fragment_contact_information.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import java.io.IOException
 import javax.inject.Inject
-import kotlin.coroutines.coroutineContext
 
 class ContactInformationViewModel @Inject constructor(application: Application) :
     AndroidViewModel(application) {
@@ -56,18 +43,15 @@ class ContactInformationViewModel @Inject constructor(application: Application) 
 
     @SuppressLint("CheckResult")
     private fun requestIsRoom(patientUI: String) {
-
-
         try {
             Observable.just(repository.readAllContractInfo())
                 .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.newThread())  //AndroidSchedulers.mainThread()
+                .observeOn(Schedulers.newThread())
                 .subscribe({ result ->
                     if (result.isEmpty()) {
                         loadInformationIsServer(patientUI)
                     }
                 }, { error ->
-
                 })
         } catch (e: IOException) {
             e.printStackTrace()

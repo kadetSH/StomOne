@@ -13,20 +13,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.stomone.R
 import com.example.stomone.recyclerRadiationDose.RadiationDoseAdapter
 import com.example.stomone.recyclerRadiationDose.RadiationDoseItem
-import com.example.stomone.recyclerXRays.XRaysAdapter
-import com.example.stomone.recyclerXRays.XRaysItem
 import com.example.stomone.room.RRadiationDose
-import com.example.stomone.room.RXRays
 import com.example.stomone.viewmodels.RadiationDoseViewModel
-import com.example.stomone.viewmodels.XRaysViewModel
 import dagger.android.support.DaggerFragment
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_radiation_dose.*
-import kotlinx.android.synthetic.main.fragment_x_rays.*
 import javax.inject.Inject
 
-class RadiationDoseFragment: DaggerFragment() {
+class RadiationDoseFragment : DaggerFragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -45,8 +40,8 @@ class RadiationDoseFragment: DaggerFragment() {
     }
 
     var patientUI: String? = null
-    private var recyclerView : RecyclerView? = null
-    private var adapter : RadiationDoseAdapter? = null
+    private var recyclerView: RecyclerView? = null
+    private var adapter: RadiationDoseAdapter? = null
     private var list = ArrayList<RadiationDoseItem>()
     lateinit var anima: View
     private lateinit var starAnim: Animation
@@ -63,7 +58,7 @@ class RadiationDoseFragment: DaggerFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         arguments?.let { arg ->
-            patientUI = arg.getString("patientUI")
+            patientUI = arg.getString(requireContext().resources.getString(R.string.key_patient_ui))
         }
         (activity as? RadiationDoseFragment.SetTitleIsFragment)?.setTitleRadiationDose(
             requireContext().resources.getString(R.string.drawer_menu_irradiation)

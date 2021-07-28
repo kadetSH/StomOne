@@ -13,7 +13,7 @@ import com.example.stomone.viewmodels.ViewPhotoViewModel
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
-class ViewPhotoFragment: DaggerFragment() {
+class ViewPhotoFragment : DaggerFragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -25,8 +25,8 @@ class ViewPhotoFragment: DaggerFragment() {
         requireActivity().findViewById(R.id.id_view_photo) as ImageView
     }
 
-    var btm : Bitmap? = null
-    var window : String? = null
+    var btm: Bitmap? = null
+    var window: String? = null
 
     companion object {
         fun newInstance(btm: Bitmap?, window: String?): ViewPhotoFragment {
@@ -51,10 +51,10 @@ class ViewPhotoFragment: DaggerFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         arguments?.let { arg ->
-            btm = arg.getParcelable("photo")
-            window = arg.getString("window")
+            btm = arg.getParcelable(requireContext().resources.getString(R.string.key_photo))
+            window = arg.getString(requireContext().resources.getString(R.string.key_window))
         }
-        if (window == context?.resources?.getString(R.string.tag_window_x_rays)){
+        if (window == context?.resources?.getString(R.string.tag_window_x_rays)) {
             context?.getString(R.string.tag_view_photo_title_x_rays)?.let {
                 (activity as? ViewPhotoFragment.OnBackPressedFromViewPhoto)?.onBackPressedFromViewPhoto(
                     it
@@ -62,7 +62,7 @@ class ViewPhotoFragment: DaggerFragment() {
             }
             image.scaleType = ImageView.ScaleType.CENTER_CROP
         }
-        if (window == context?.resources?.getString(R.string.tag_window_pictures_visit)){
+        if (window == context?.resources?.getString(R.string.tag_window_pictures_visit)) {
             context?.getString(R.string.tag_view_photo_title_pictures)?.let {
                 (activity as? ViewPhotoFragment.OnBackPressedFromViewPhoto)?.onBackPressedFromViewPhoto(
                     it
@@ -73,11 +73,8 @@ class ViewPhotoFragment: DaggerFragment() {
         image.setImageBitmap(btm)
     }
 
-
-    interface OnBackPressedFromViewPhoto{
+    interface OnBackPressedFromViewPhoto {
         fun onBackPressedFromViewPhoto(titleIsFragment: String)
     }
-
-
 
 }

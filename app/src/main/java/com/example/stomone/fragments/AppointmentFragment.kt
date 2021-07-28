@@ -1,6 +1,5 @@
 package com.example.stomone.fragments
 
-import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,15 +14,11 @@ import com.example.stomone.R
 import com.example.stomone.jsonMy.ListOfApplicationsJS
 import com.example.stomone.recyclerAppointment.AppointmentAdapter
 import com.example.stomone.recyclerAppointment.AppointmentItem
-import com.example.stomone.recyclerXRays.XRaysAdapter
-import com.example.stomone.recyclerXRays.XRaysItem
 import com.example.stomone.viewmodels.AppointmentViewModel
-import com.example.stomone.viewmodels.XRaysViewModel
 import dagger.android.support.DaggerFragment
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_appointment.*
-import kotlinx.android.synthetic.main.fragment_x_rays.*
 import javax.inject.Inject
 
 class AppointmentFragment : DaggerFragment() {
@@ -45,8 +40,8 @@ class AppointmentFragment : DaggerFragment() {
     }
 
     var patientUI: String? = null
-    private var recyclerView : RecyclerView? = null
-    private var adapter : AppointmentAdapter? = null
+    private var recyclerView: RecyclerView? = null
+    private var adapter: AppointmentAdapter? = null
     private var list = ArrayList<AppointmentItem>()
     lateinit var anima: View
     private lateinit var starAnim: Animation
@@ -63,7 +58,7 @@ class AppointmentFragment : DaggerFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         arguments?.let { arg ->
-            patientUI = arg.getString("patientUI")
+            patientUI = arg.getString(requireContext().resources.getString(R.string.key_patient_ui))
         }
         (activity as? AppointmentFragment.SetTitleIsFragment)?.setTitleIsAppointment(
             requireContext().resources.getString(R.string.drawer_menu_appointment)
@@ -96,7 +91,6 @@ class AppointmentFragment : DaggerFragment() {
     }
 
     private fun observeViewModel() {
-
         viewModel.toastMessage.observe(
             viewLifecycleOwner,
             androidx.lifecycle.Observer<String> { message ->
@@ -115,13 +109,17 @@ class AppointmentFragment : DaggerFragment() {
             viewLifecycleOwner,
             androidx.lifecycle.Observer<ArrayList<ListOfApplicationsJS>> { result ->
                 list.clear()
-                result.forEach {item ->
-                    list.add(AppointmentItem(item.requestNumber,
-                    item.doctorFIO,
-                    item.doctorProfession,
-                    item.dateRequest,
-                    item.timeStart,
-                    item.timeEnd))
+                result.forEach { item ->
+                    list.add(
+                        AppointmentItem(
+                            item.requestNumber,
+                            item.doctorFIO,
+                            item.doctorProfession,
+                            item.dateRequest,
+                            item.timeStart,
+                            item.timeEnd
+                        )
+                    )
                 }
                 recyclerView?.adapter?.notifyDataSetChanged()
             })

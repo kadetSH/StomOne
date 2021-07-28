@@ -18,12 +18,12 @@ import javax.inject.Inject
 class ContractsViewModel @Inject constructor(application: Application) :
     AndroidViewModel(application) {
 
-
     private var _booleanAnimation = SingleLiveEvent<Boolean>()
     val booleanAnimation: LiveData<Boolean> get() = _booleanAnimation
 
     val readAllContractsLiveData: LiveData<List<RContracts>>
     private val repository: LoginRepository
+
     init {
         val loginDao = LoginDatabase.getLoginDatabase(application).filmDao()
         repository = LoginRepository(loginDao)
@@ -35,41 +35,17 @@ class ContractsViewModel @Inject constructor(application: Application) :
     }
 
 
-        @SuppressLint("CheckResult")
-        fun requestContractsIsServer(patientUI: String){
-            requestIsRoom(patientUI)
-//            val JSON = PatientUIjs(patientUI)
-//            App.instance.api.patientContractsRequest(JSON)
-//                .subscribeOn(Schedulers.io())
-//                .doOnError {
-//                    println("")
-//                }
-//                .subscribeOn(Schedulers.newThread())
-//                .subscribe(
-//                    { result ->
-//                        var list = ArrayList<ContractItem>()
-//                       result.forEach {  items ->
-//
-//                           val checkInt = items.contractCompleted.toInt()
-//                           val checkBoolean: Boolean = checkInt == 1
-//                           list.add(ContractItem(items.contractNumber, items.dateOfContractCreation, checkBoolean, items.doctor))
-//                       }
-//                        if (list.size > 0){
-//                            _contractsList.postValue(list)
-//                        }
-//                    },
-//                    { error ->
-//                        println("")
-//                    }
-//                )
-        }
+    @SuppressLint("CheckResult")
+    fun requestContractsIsServer(patientUI: String) {
+        requestIsRoom(patientUI)
+    }
 
     @SuppressLint("CheckResult")
-    private fun requestIsRoom(patientUI: String){
+    private fun requestIsRoom(patientUI: String) {
         try {
             Observable.just(repository.readAllContracts())
                 .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.newThread())  //AndroidSchedulers.mainThread()
+                .observeOn(Schedulers.newThread())
                 .subscribe({ result ->
                     if (result.isEmpty()) {
                         loadInformationIsServer(patientUI)
@@ -85,18 +61,26 @@ class ContractsViewModel @Inject constructor(application: Application) :
     }
 
     @SuppressLint("CheckResult")
-    private fun loadInformationIsServer(patientUI: String){
+    private fun loadInformationIsServer(patientUI: String) {
         val JSON = PatientUIjs(patientUI)
         App.instance.api.patientContractsRequest(JSON)
             .subscribeOn(Schedulers.io())
             .doOnError {
-                println("")
+                _booleanAnimation.postValue(false)
             }
             .subscribeOn(Schedulers.newThread())
             .subscribe(
                 { result ->
                     result.forEach { items ->
-                        repository.addContracts(RContracts(0, items.contractNumber, items.dateOfContractCreation, items.contractCompleted, items.doctor))
+                        repository.addContracts(
+                            RContracts(
+                                0,
+                                items.contractNumber,
+                                items.dateOfContractCreation,
+                                items.contractCompleted,
+                                items.doctor
+                            )
+                        )
                     }
                 },
                 { error ->

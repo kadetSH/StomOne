@@ -43,7 +43,7 @@
         android:ems="20"
         android:hint="@string/authorization_hint_surname"
         android:importantForAutofill="no"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName|textCapWords" />
 
     <EditText
         android:id="@+id/auth_editTextName"
@@ -55,7 +55,7 @@
         android:ems="20"
         android:hint="@string/authorization_hint_name"
         android:importantForAutofill="no"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName|textCapWords" />
 
     <EditText
         android:id="@+id/auth_editTextPatronymic"
@@ -67,7 +67,7 @@
         android:ems="20"
         android:hint="@string/authorization_hint_patronymic"
         android:importantForAutofill="no"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName|textCapWords" />
 
     <EditText
         android:id="@+id/auth_editTextTextPassword"
@@ -94,13 +94,23 @@
         android:textSize="16sp"
         android:textStyle="bold" />
 
+    <ImageView
+        android:id="@+id/id_activation_anim"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="32dp"
+        android:visibility="invisible"
+        app:srcCompat="@drawable/baseline_schedule_24" />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_gravity="end"
-        android:layout_marginTop="150dp"
+        android:layout_gravity="start"
+        android:layout_marginTop="100dp"
         android:layout_marginEnd="10dp"
+        android:layout_marginStart="12dp"
         android:backgroundTint="@color/button_color"
         android:contentDescription="TODO"
         android:src="@drawable/twotone_password_20" />

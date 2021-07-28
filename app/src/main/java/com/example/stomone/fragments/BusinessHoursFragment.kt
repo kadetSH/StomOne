@@ -1,6 +1,5 @@
 package com.example.stomone.fragments
 
-import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
@@ -8,7 +7,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
@@ -22,7 +20,6 @@ import com.example.stomone.recyclerBusinessHours.BusinessHoursItem
 import com.example.stomone.viewmodels.BusinessHoursViewModel
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_business_hours.*
-import kotlinx.android.synthetic.main.template_business_hours.*
 import javax.inject.Inject
 
 class BusinessHoursFragment : DaggerFragment() {
@@ -59,11 +56,6 @@ class BusinessHoursFragment : DaggerFragment() {
     private var adapter: BusinessHoursAdapter? = null
     private var list = ArrayList<BusinessHoursItem>()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -76,10 +68,13 @@ class BusinessHoursFragment : DaggerFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         arguments?.let { arg ->
-            doctorRequest = arg.getString("doctorRequest")
-            dateRequest = arg.getString("dateRequest")
-            periodOfTimeRequest = arg.getString("periodOfTimeRequest")
-            patientUI = arg.getString("patientUI")
+            doctorRequest =
+                arg.getString(requireContext().resources.getString(R.string.key_doctorRequest))
+            dateRequest =
+                arg.getString(requireContext().resources.getString(R.string.key_dateRequest))
+            periodOfTimeRequest =
+                arg.getString(requireContext().resources.getString(R.string.key_periodOfTimeRequest))
+            patientUI = arg.getString(requireContext().resources.getString(R.string.key_patient_ui))
         }
         doctorRequest?.let {
             (activity as? BusinessHoursFragment.SetTitleIsFragment)?.setTitleIsBusinessHours(
@@ -191,7 +186,6 @@ class BusinessHoursFragment : DaggerFragment() {
             viewModel.createOfRequestOnServer(anAppointmentJS)
         }
         builderAlertDialog.setMessage(resources.getString(R.string.toast_make_an_appointment))
-//        builderAlertDialog.setTitle(resources.getString(R.string.Hello))
         builderAlertDialog.setNegativeButton(resources.getString(R.string.labelNo), clickCancel)
         builderAlertDialog.setPositiveButton(resources.getString(R.string.labelYes), clickRecording)
         val dialog: AlertDialog = builderAlertDialog.create()

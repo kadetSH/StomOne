@@ -6,14 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.stomone.R
 import com.example.stomone.recyclerContracts.ContractItem
 import com.example.stomone.recyclerContracts.ContractsAdapter
-import com.example.stomone.room.RContactInformation
 import com.example.stomone.room.RContracts
 import com.example.stomone.viewmodels.ContractsViewModel
 import dagger.android.support.DaggerFragment
@@ -39,28 +37,13 @@ class ContractsFragment : DaggerFragment() {
             return fragment
         }
     }
+
     lateinit var anima: View
     private lateinit var starAnim: Animation
-    private var recyclerView : RecyclerView? = null
-    private var adapter : ContractsAdapter? = null
-//    private val recyclerView by lazy {
-//        requireActivity().findViewById(R.id.id_recyclerView_contracts) as RecyclerView
-//    }
+    private var recyclerView: RecyclerView? = null
+    private var adapter: ContractsAdapter? = null
     private var list = ArrayList<ContractItem>()
-//    private val adapter by lazy {
-//        ContractsAdapter(
-//            LayoutInflater.from(requireContext()),
-//            list
-//        )
-//    }
-
     var patientUI: String? = null
-
-    @Suppress("DEPRECATION")
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-//        retainInstance = true
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -74,20 +57,16 @@ class ContractsFragment : DaggerFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         arguments?.let { arg ->
-            patientUI = arg.getString("patientUI")
+            patientUI = arg.getString(requireContext().resources.getString(R.string.key_patient_ui))
         }
-
         (activity as? ContractsFragment.SetTitleIsFragment)?.setTitleIsContracts(
             requireContext().resources.getString(R.string.drawer_menu_contracts)
         )
-
         initAnimationView()
         viewModel.isAnimation(true)
-
         initRecycler()
         observeViewModel()
         requestContracts()
-
     }
 
     private fun initAnimationView() {
@@ -126,7 +105,7 @@ class ContractsFragment : DaggerFragment() {
                         )
                     )
                 }
-                if (list.size > 0){
+                if (list.size > 0) {
                     viewModel.isAnimation(false)
                 }
                 recyclerView?.adapter?.notifyDataSetChanged()

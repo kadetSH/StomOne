@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.stomone.R
 
-
 class VisitHistoryAdapter(private val layoutInflater: LayoutInflater,
                           private val itemsArray: ArrayList<VisitHistoryItem>):  RecyclerView.Adapter<VisitHistoryHolder>() {
 

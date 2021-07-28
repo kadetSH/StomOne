@@ -9,12 +9,16 @@ import androidx.fragment.app.Fragment
 import com.example.stomone.PushItem
 import com.example.stomone.R
 
-class PushFragment: Fragment() {
+class PushFragment : Fragment() {
 
     companion object {
-        fun newInstance(pushItem: PushItem?): PushFragment {
+        fun newInstance(
+            titlePush: String?,
+            messagePush: String?
+        ): PushFragment {  //pushItem: PushItem?
             val args = Bundle()
-            args.putSerializable("pushItem", pushItem)
+            args.putString("Название пуша", titlePush)
+            args.putString("Сообщение пуша", messagePush)
             val fragment = PushFragment()
             fragment.arguments = args
             return fragment
@@ -28,7 +32,8 @@ class PushFragment: Fragment() {
         requireActivity().findViewById(R.id.id_push_message) as TextView
     }
 
-    var pushItem: PushItem? = null
+    var pushTitle: String? = null
+    var pushMessage: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,14 +46,15 @@ class PushFragment: Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        pushItem = arguments?.getSerializable("pushItem") as PushItem
+        pushTitle = arguments?.getString("Название пуша")
+        pushMessage = arguments?.getString("Сообщение пуша")
 
-        pushItem?.let { item ->
-            editTitle.text = item.titlePush
-            editMessage.text = item.messagePush
+        pushTitle?.let { title ->
+            pushMessage?.let { message ->
+                editTitle.text = title
+                editMessage.text = message
+            }
         }
-        println("")
-
     }
 
 
