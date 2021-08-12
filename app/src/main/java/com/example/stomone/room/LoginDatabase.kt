@@ -6,6 +6,20 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.example.stomone.room.contactInformation.ContactInformationDao
+import com.example.stomone.room.authorization.AuthorizationDao
+import com.example.stomone.room.contactInformation.RContactInformation
+import com.example.stomone.room.authorization.RLogin
+import com.example.stomone.room.contracts.ContractsDao
+import com.example.stomone.room.contracts.RContracts
+import com.example.stomone.room.picturesVisit.PicturesVisitDao
+import com.example.stomone.room.picturesVisit.RPicturesVisit
+import com.example.stomone.room.radiationDose.RRadiationDose
+import com.example.stomone.room.radiationDose.RadiationDoseDao
+import com.example.stomone.room.visitHistory.RVisitHistory
+import com.example.stomone.room.visitHistory.VisitHistoryDao
+import com.example.stomone.room.xrays.RXRays
+import com.example.stomone.room.xrays.XRaysDao
 
 @Database(
     entities = [RLogin::class, RContactInformation::class, RContracts::class, RVisitHistory::class,
@@ -13,12 +27,19 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 )
 abstract class LoginDatabase : RoomDatabase() {
 
-    abstract fun filmDao(): LoginDao
+    abstract fun contactInformationDao(): ContactInformationDao
+    abstract fun authorizationDao(): AuthorizationDao
+    abstract fun contractsDao(): ContractsDao
+    abstract fun visitHistoryDao(): VisitHistoryDao
+    abstract fun xRaysDao(): XRaysDao
+    abstract fun picturesVisitDao(): PicturesVisitDao
+    abstract fun radiationDoseDao(): RadiationDoseDao
 
     companion object {
         @Volatile
         private var INSTANCE: LoginDatabase? = null
 
+        @Suppress("LocalVariableName")
         fun getLoginDatabase(application: Application): LoginDatabase {
 
             val tempInstance = INSTANCE

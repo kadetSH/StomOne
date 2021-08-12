@@ -6,9 +6,10 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import com.example.stomone.fragments.ActivationDatabaseFragment
-import com.example.stomone.fragments.PushFragment
-import com.example.stomone.fragments.SetPasswordFragment
+import com.example.stomone.authorization.fragment.ActivationDatabaseFragment
+import com.example.stomone.push.fragment.PushFragment
+import com.example.stomone.authorization.fragment.SetPasswordFragment
+import com.example.stomone.authorization.item.LoginItem
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import dagger.android.support.DaggerAppCompatActivity
 
@@ -49,7 +50,6 @@ class MainActivity : DaggerAppCompatActivity(),
 
         //Без этого лога не отправляется отчет об ошибках
         Crashlytics.log(IllegalArgumentException())
-//        throw IllegalArgumentException()
     }
 
     private fun checkSharedPush() {

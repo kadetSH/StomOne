@@ -5,20 +5,25 @@ import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.FragmentManager
-import com.example.stomone.fragments.*
-import com.example.stomone.recyclerOfficeHours.OfficeHoursItem
-import com.google.android.gms.tasks.OnCompleteListener
+import com.example.stomone.databinding.ActivityPatientRecordBinding
+import com.example.stomone.databinding.AppBarMainBinding
+import com.example.stomone.menuItems.appointment.fragment.AppointmentFragment
+import com.example.stomone.menuItems.contactInformation.fragment.ContactInformationFragment
+import com.example.stomone.menuItems.contracts.fragment.ContractsFragment
+import com.example.stomone.menuItems.picturesVisit.fragment.PicturesVisitFragment
+import com.example.stomone.menuItems.radiationDose.fragment.RadiationDoseFragment
+import com.example.stomone.menuItems.schedule.businesHours.fragment.BusinessHoursFragment
+import com.example.stomone.menuItems.schedule.departmentDoctors.fragment.OfficeHoursFragment
+import com.example.stomone.menuItems.schedule.departmentDoctors.recyclerOfficeHours.OfficeHoursItem
+import com.example.stomone.menuItems.schedule.departments.fragment.ListDepartmentFragment
+import com.example.stomone.menuItems.viewPhoto.fragment.ViewPhotoFragment
+import com.example.stomone.menuItems.visitHistory.fragment.VisitHistoryFragment
+import com.example.stomone.menuItems.xrays.fragment.XRaysFragment
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.crashlytics.FirebaseCrashlytics
-import com.google.firebase.messaging.FirebaseMessaging
 import dagger.android.support.DaggerAppCompatActivity
-import kotlinx.android.synthetic.main.activity_patient_record.*
-import kotlinx.android.synthetic.main.activity_patient_record.drawer_layout
-import java.lang.IllegalArgumentException
 
 class PatientRecordActivity : DaggerAppCompatActivity(),
     NavigationView.OnNavigationItemSelectedListener,
@@ -26,19 +31,12 @@ class PatientRecordActivity : DaggerAppCompatActivity(),
     ListDepartmentFragment.OnClickViewDepartment,
     OfficeHoursFragment.OnOfficeHoursClickListener,
     PicturesVisitFragment.OnClickViewPicturesVisit,
-    PicturesVisitFragment.SetTitleIsFragment,
-    ContactInformationFragment.SetTitleIsFragment,
-    ContractsFragment.SetTitleIsFragment,
-    VisitHistoryFragment.SetTitleIsFragment,
-    XRaysFragment.SetTitleIsFragment,
-    RadiationDoseFragment.SetTitleIsFragment,
-    AppointmentFragment.SetTitleIsFragment,
-    ListDepartmentFragment.SetTitleIsFragment,
-    OfficeHoursFragment.SetTitleIsFragment,
-    BusinessHoursFragment.SetTitleIsFragment,
-    ViewPhotoFragment.OnBackPressedFromViewPhoto {
+    TitleController
+   {
 
     private var patientUI = ""
+    private lateinit var binding: ActivityPatientRecordBinding
+    private lateinit var toolbarBinding: AppBarMainBinding
 
     object Crashlytics {
         fun log(e: Throwable) {
@@ -49,15 +47,19 @@ class PatientRecordActivity : DaggerAppCompatActivity(),
     @Suppress("DEPRECATION")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_patient_record)
+        binding = ActivityPatientRecordBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
+
         sharedPreferences()
+        toolbarBinding = binding.idAppBarPatientActivity
 
         //Без этого лога не отправляется отчет об ошибках
         MainActivity.Crashlytics.log(IllegalArgumentException())
 
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        val toolbar = toolbarBinding.idToolbar
         setSupportActionBar(toolbar)
-        val drawer = findViewById<DrawerLayout>(R.id.drawer_layout)
+        val drawer = binding.drawerLayoutPatientActivity
         val toggle = ActionBarDrawerToggle(
             this, drawer, toolbar,
             R.string.navigation_drawer_open, R.string.navigation_drawer_close
@@ -66,7 +68,7 @@ class PatientRecordActivity : DaggerAppCompatActivity(),
         toggle.syncState()
 
         //Слушаем нажатие в выпадающем меню
-        id_navigation.setNavigationItemSelectedListener(this)
+        binding.idNavigation.setNavigationItemSelectedListener(this)
 
         val fragmentManager: FragmentManager = supportFragmentManager
         val fragments: MutableList<androidx.fragment.app.Fragment> = fragmentManager.fragments
@@ -74,7 +76,6 @@ class PatientRecordActivity : DaggerAppCompatActivity(),
             openContactInformation()
         }
     }
-
 
     override fun onBackPressed() {
         when (title) {
@@ -103,7 +104,7 @@ class PatientRecordActivity : DaggerAppCompatActivity(),
                 openViewSchedule()
             }
             else -> {
-                drawer_layout.openDrawer(GravityCompat.START)
+                binding.drawerLayoutPatientActivity.openDrawer(GravityCompat.START)
             }
         }
     }
@@ -119,7 +120,7 @@ class PatientRecordActivity : DaggerAppCompatActivity(),
             R.id.id_dm_appointment -> openAppointment()
             R.id.id_dm_schedule -> openViewSchedule()
         }
-        drawer_layout.closeDrawer(GravityCompat.START)
+        binding.drawerLayoutPatientActivity.closeDrawer(GravityCompat.START)
         return true
     }
 
@@ -275,49 +276,8 @@ class PatientRecordActivity : DaggerAppCompatActivity(),
             .commit()
     }
 
-    override fun setTitleIsContactInformation(titleIsFragment: String) {
+    override fun setTitle(titleIsFragment: String) {
         title = titleIsFragment
     }
-
-    override fun setTitleIsContracts(titleIsFragment: String) {
-        title = titleIsFragment
-    }
-
-    override fun setTitleIsVisitHistory(titleIsFragment: String) {
-        title = titleIsFragment
-    }
-
-    override fun setTitleIsXRays(titleIsFragment: String) {
-        title = titleIsFragment
-    }
-
-    override fun setTitleIsPicturesVisit(titleIsFragment: String) {
-        title = titleIsFragment
-    }
-
-    override fun setTitleRadiationDose(titleIsFragment: String) {
-        title = titleIsFragment
-    }
-
-    override fun setTitleIsAppointment(titleIsFragment: String) {
-        title = titleIsFragment
-    }
-
-    override fun setTitleIsListDepartment(titleIsFragment: String) {
-        title = titleIsFragment
-    }
-
-    override fun setTitleIsOfficeHours(titleIsFragment: String) {
-        title = titleIsFragment
-    }
-
-    override fun setTitleIsBusinessHours(titleIsFragment: String) {
-        title = titleIsFragment
-    }
-
-    override fun onBackPressedFromViewPhoto(titleIsFragment: String) {
-        title = titleIsFragment
-    }
-
 
 }

@@ -1,71 +1,70 @@
 package com.example.stomone
 
 import com.example.stomone.dagger.DaggerAppComponent
-import com.example.stomone.net.Api
+import com.example.stomone.dagger.retrofit.repository.RetrofitServiceInterfaceAuthorization
+import com.example.stomone.domain.AuthorizationInteractor
+import com.example.stomone.room.authorization.AuthorizationDao
+import com.example.stomone.room.contactInformation.ContactInformationDao
+import com.example.stomone.room.contracts.ContractsDao
+import com.example.stomone.room.picturesVisit.PicturesVisitDao
+import com.example.stomone.room.radiationDose.RadiationDoseDao
+import com.example.stomone.room.visitHistory.VisitHistoryDao
+import com.example.stomone.room.xrays.XRaysDao
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
-import java.util.*
-import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
 class App : DaggerApplication() {
 
-    lateinit var api: Api
+    @Inject
+    lateinit var mServise: RetrofitServiceInterfaceAuthorization
+
+    @Inject
+    lateinit var authorizationDao: AuthorizationDao
+
+    @Inject
+    lateinit var contactInformationDao: ContactInformationDao
+
+    @Inject
+    lateinit var contractsDao: ContractsDao
+
+    @Inject
+    lateinit var visitHistoryDao: VisitHistoryDao
+
+    @Inject
+    lateinit var xRaysDao: XRaysDao
+
+    @Inject
+    lateinit var picturesVisitDao: PicturesVisitDao
+
+    @Inject
+    lateinit var radiationDoseDao: RadiationDoseDao
+
+    lateinit var authorizationInteractor: AuthorizationInteractor
 
     override fun onCreate() {
         super.onCreate()
         instance = this
-        initRetrofit()
+        initAuthorizationInteractor()
+    }
+
+    private fun initAuthorizationInteractor() {
+        authorizationInteractor = AuthorizationInteractor(
+            mServise,
+            authorizationDao,
+            contactInformationDao,
+            contractsDao,
+            visitHistoryDao,
+            xRaysDao,
+            picturesVisitDao,
+            radiationDoseDao
+        )
     }
 
     private val applicationInjector = DaggerAppComponent.builder().application(this).build()
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> = applicationInjector
 
-    private fun initRetrofit() {
-
-        val okHttpClient = OkHttpClient.Builder()
-            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)) //logging
-            .build()
-
-        val client = OkHttpClient.Builder()
-            .connectTimeout(6, TimeUnit.SECONDS)
-            .writeTimeout(6, TimeUnit.SECONDS)
-            .readTimeout(9, TimeUnit.SECONDS)
-            .addInterceptor(HttpLoggingInterceptor()
-                .apply {
-                    if (BuildConfig.DEBUG) {
-                        level = HttpLoggingInterceptor.Level.BASIC
-                    }
-                })
-            .pingInterval(1, TimeUnit.SECONDS)
-            .addInterceptor { chain ->
-                return@addInterceptor chain.proceed(
-                    chain
-                        .request()
-                        .newBuilder()
-                        .build()
-                )
-            }
-            .build()
-
-        val retrofit = Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .client(okHttpClient)
-            .build()
-
-        api = retrofit.create(Api::class.java)
-
-    }
-
     companion object {
-        const val BASE_URL = "http://82.151.121.124:6792/"
-
         lateinit var instance: App
             private set
     }

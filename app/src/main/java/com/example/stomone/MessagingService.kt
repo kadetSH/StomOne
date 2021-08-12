@@ -29,7 +29,6 @@ class MessagingService : FirebaseMessagingService() {
             .build()
 
         savePush(title, message)
-
         val myWorkRequest = OneTimeWorkRequest.Builder(UploadWorker::class.java)
             .setInitialDelay(1000, TimeUnit.MILLISECONDS)
             .setInputData(myData)

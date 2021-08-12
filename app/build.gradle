@@ -1,11 +1,14 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
+//apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 // Apply the Crashlytics Gradle plugin
 apply plugin: 'com.google.firebase.crashlytics'
 apply plugin: 'com.google.gms.google-services'
+
+def STRING = 'String'
+def BASE_URL = '"' + baseURL + '"'
 
 kapt {
     generateStubs = true
@@ -27,7 +30,19 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        each { type ->
+            type.buildConfigField STRING, 'baseURL', BASE_URL
+        }
+
+        buildFeatures {
+            viewBinding = true
+        }
     }
+
+
+
+
 
     buildTypes {
         release {
@@ -75,7 +90,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.2.1'
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
-    implementation "com.google.android.gms:play-services-auth:16.0.1"
+//    implementation "com.google.android.gms:play-services-auth:16.0.1"
     implementation 'androidx.fragment:fragment-ktx:1.3.3'
     implementation "androidx.lifecycle:lifecycle-reactivestreams-ktx:2.3.1"
     implementation "android.arch.lifecycle:reactivestreams:1.0.0"
@@ -95,6 +110,10 @@ dependencies {
 
     // Dagger
     implementation 'com.google.dagger:dagger-android-support:2.27'
+    implementation 'com.google.dagger:dagger:2.27'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.27'
+    kapt 'com.google.dagger:dagger-compiler:2.27'
+    kapt "com.google.dagger:dagger-android-processor:2.27"
 
     // Room components
     implementation "androidx.room:room-ktx:$rootProject.roomVersion"
@@ -102,9 +121,7 @@ dependencies {
     androidTestImplementation "androidx.room:room-testing:$rootProject.roomVersion"
 
 
-    implementation 'com.google.dagger:dagger:2.27'
-    kapt 'com.google.dagger:dagger-compiler:2.27'
-    kapt "com.google.dagger:dagger-android-processor:2.27"
+
 
     //vertx
     implementation 'io.vertx:vertx-web-client:3.9.4'

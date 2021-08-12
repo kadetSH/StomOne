@@ -1,10 +1,18 @@
 package com.example.stomone.dagger
 
-
-
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.stomone.viewmodels.*
+import com.example.stomone.authorization.viewModel.ActivationDatabaseViewModel
+import com.example.stomone.authorization.viewModel.SetPasswordViewModel
+import com.example.stomone.menuItems.appointment.viewModel.AppointmentViewModel
+import com.example.stomone.menuItems.contactInformation.viewModel.ContactInformationViewModel
+import com.example.stomone.menuItems.contracts.viewModel.ContractsViewModel
+import com.example.stomone.menuItems.picturesVisit.viewModel.PicturesVisitViewModel
+import com.example.stomone.menuItems.radiationDose.viewModel.RadiationDoseViewModel
+import com.example.stomone.menuItems.schedule.businesHours.viewModel.BusinessHoursViewModel
+import com.example.stomone.menuItems.schedule.departmentDoctors.viewModel.OfficeHoursViewModel
+import com.example.stomone.menuItems.visitHistory.viewModel.VisitHistoryViewModel
+import com.example.stomone.menuItems.xrays.viewModel.XRaysViewModel
 import dagger.Binds
 import dagger.MapKey
 import dagger.Module
@@ -53,16 +61,6 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(RadiationDoseViewModel::class)
     abstract fun bindRadiationDoseViewModel(favoritesFilmsViewModel: RadiationDoseViewModel): ViewModel
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(ViewPhotoViewModel::class)
-    abstract fun bindViewPhotoViewModel(favoritesFilmsViewModel: ViewPhotoViewModel): ViewModel
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(ListDepartmentViewModel::class)
-    abstract fun bindListDepartmentViewModel(favoritesFilmsViewModel: ListDepartmentViewModel): ViewModel
 
     @Binds
     @IntoMap

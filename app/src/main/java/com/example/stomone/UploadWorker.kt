@@ -12,6 +12,7 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
+import com.example.stomone.push.item.PushItem
 
 class UploadWorker(appContext: Context, workerParams: WorkerParameters) :
     CoroutineWorker(appContext, workerParams) {
@@ -37,12 +38,6 @@ class UploadWorker(appContext: Context, workerParams: WorkerParameters) :
     ) {
         val alarmManager: AlarmManager? = null
         val intent = Intent(applicationContext, MainActivity::class.java)
-//        intent.apply {
-//            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-//            putExtra("title", titlePush)
-//            putExtra("message", messagePush)
-//        }
-
         val pendingIntent = PendingIntent.getActivity(
             context, 0, intent,
             PendingIntent.FLAG_ONE_SHOT or PendingIntent.FLAG_CANCEL_CURRENT
@@ -65,16 +60,10 @@ class UploadWorker(appContext: Context, workerParams: WorkerParameters) :
             .setContentText(pushItem.messagePush)
             .setPriority(NotificationCompat.PRIORITY_LOW)
             .setContentIntent(pendingIntent)
-//            .addAction(
-//                R.drawable.baseline_person_18,
-//                context.getString(R.string.uploadWorker_clickMe),
-//                pendingIntent
-//            )
             .setAutoCancel(true)
 
         val notificationManager = NotificationManagerCompat.from(context)
         notificationManager.notify(101, builder.build())
-
         alarmManager?.set(
             AlarmManager.RTC_WAKEUP,
             System.currentTimeMillis() + 1000L,

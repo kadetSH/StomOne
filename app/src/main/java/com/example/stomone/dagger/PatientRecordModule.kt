@@ -1,6 +1,5 @@
 package com.example.stomone.dagger
 
-import com.example.stomone.MainActivity
 import com.example.stomone.PatientRecordActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -15,5 +14,4 @@ abstract class PatientRecordModule {
     )
 
     abstract fun contributePatientRecordActivity(): PatientRecordActivity
-
 }
