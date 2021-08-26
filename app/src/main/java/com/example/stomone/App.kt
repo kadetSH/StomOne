@@ -1,8 +1,8 @@
 package com.example.stomone
 
 import com.example.stomone.dagger.DaggerAppComponent
-import com.example.stomone.dagger.retrofit.repository.RetrofitServiceInterfaceAuthorization
-import com.example.stomone.domain.AuthorizationInteractor
+import com.example.stomone.dagger.retrofit.repository.*
+import com.example.stomone.domain.*
 import com.example.stomone.room.authorization.AuthorizationDao
 import com.example.stomone.room.contactInformation.ContactInformationDao
 import com.example.stomone.room.contracts.ContractsDao
@@ -18,6 +18,30 @@ class App : DaggerApplication() {
 
     @Inject
     lateinit var mServise: RetrofitServiceInterfaceAuthorization
+
+    @Inject
+    lateinit var mServiseApplications: RetrofitServiceInterfaceApplications
+
+    @Inject
+    lateinit var mServiseContactInformation: RetrofitServiceInterfaceContactInformation
+
+    @Inject
+    lateinit var mServiseContractsInteractor: RetrofitServiceInterfaceContracts
+
+    @Inject
+    lateinit var mServisePicturesVisitInteractor: RetrofitServiceInterfacePicturesVisit
+
+    @Inject
+    lateinit var mServiseRadiationDoseInteractor: RetrofitServiceInterfaceRadiationDose
+
+    @Inject
+    lateinit var mServiseScheduleInteractor: RetrofitServiceInterfaceSchedule
+
+    @Inject
+    lateinit var mServiseVisitHistoryInteractor: RetrofitServiceInterfaceVisitHistory
+
+    @Inject
+    lateinit var mServiseXRaysInteractor: RetrofitServiceInterfaceXRays
 
     @Inject
     lateinit var authorizationDao: AuthorizationDao
@@ -41,14 +65,22 @@ class App : DaggerApplication() {
     lateinit var radiationDoseDao: RadiationDoseDao
 
     lateinit var authorizationInteractor: AuthorizationInteractor
+    lateinit var appointmentInteractor: AppointmentInteractor
+    lateinit var contactInformationInteractor: ContactInformationInteractor
+    lateinit var contractsInteractor: ContractsInteractor
+    lateinit var picturesVisitInteractor: PicturesVisitInteractor
+    lateinit var radiationDoseInteractor: RadiationDoseInteractor
+    lateinit var scheduleInteractor: ScheduleInteractor
+    lateinit var visitHistoryInteractor: VisitHistoryInteractor
+    lateinit var xRaysInteractor: XRaysInteractor
 
     override fun onCreate() {
         super.onCreate()
         instance = this
-        initAuthorizationInteractor()
+        initInteractor()
     }
 
-    private fun initAuthorizationInteractor() {
+    private fun initInteractor(){
         authorizationInteractor = AuthorizationInteractor(
             mServise,
             authorizationDao,
@@ -58,6 +90,44 @@ class App : DaggerApplication() {
             xRaysDao,
             picturesVisitDao,
             radiationDoseDao
+        )
+
+        appointmentInteractor = AppointmentInteractor(
+            mServiseApplications
+        )
+
+        contactInformationInteractor = ContactInformationInteractor(
+            mServiseContactInformation,
+            contactInformationDao
+            )
+
+        contractsInteractor = ContractsInteractor(
+            mServiseContractsInteractor,
+            contractsDao
+        )
+
+        picturesVisitInteractor = PicturesVisitInteractor(
+            mServisePicturesVisitInteractor,
+            picturesVisitDao
+        )
+
+        radiationDoseInteractor = RadiationDoseInteractor(
+            mServiseRadiationDoseInteractor,
+            radiationDoseDao
+        )
+
+        scheduleInteractor = ScheduleInteractor(
+            mServiseScheduleInteractor
+        )
+
+        visitHistoryInteractor = VisitHistoryInteractor(
+            mServiseVisitHistoryInteractor,
+            visitHistoryDao
+        )
+
+        xRaysInteractor = XRaysInteractor(
+            mServiseXRaysInteractor,
+            xRaysDao
         )
     }
 

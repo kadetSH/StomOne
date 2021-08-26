@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import com.example.stomone.App
 import com.example.stomone.SingleLiveEvent
 import com.example.stomone.dagger.retrofit.repository.RetrofitServiceInterfaceContracts
 import com.example.stomone.jsonMy.PatientUIjs
@@ -21,48 +22,24 @@ class ContractsViewModel @Inject constructor(
 ) :
     AndroidViewModel(application) {
 
-    @Inject
-    lateinit var mServise: RetrofitServiceInterfaceContracts
-
     private var _booleanAnimation = SingleLiveEvent<Boolean>()
     val booleanAnimation: LiveData<Boolean> get() = _booleanAnimation
 
     val readAllContractsLiveData: LiveData<List<RContracts>> =
         contractsDao.readAllContractsLiveData()
-
+    private val interactor = App.instance.contractsInteractor
     fun isAnimation(bool: Boolean) {
         _booleanAnimation.postValue(bool)
     }
 
     @SuppressLint("CheckResult")
     fun getContracts(patientUI: String) {
-        try {
-            Observable.just(contractsDao.readAllContracts())
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.newThread())
-                .subscribe({ result ->
-                    if (result.isEmpty()) {
-                        loadInformationIsServer(patientUI)
-                    } else {
-                        _booleanAnimation.postValue(false)
-                    }
-                }, { error ->
-                    _booleanAnimation.postValue(false)
-                })
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
-    }
-
-    @SuppressLint("CheckResult")
-    private fun loadInformationIsServer(patientUI: String) {
-        val JSON = PatientUIjs(patientUI)
-        mServise.patientContractsRequest(JSON)
-            .subscribeOn(Schedulers.io())
-            .doOnError {
+        interactor.getContracts(patientUI)
+            ?.subscribeOn(Schedulers.io())
+            ?.doOnError {
                 _booleanAnimation.postValue(false)
             }
-            .subscribe(
+            ?.subscribe(
                 { result ->
                     result.forEach { items ->
                         contractsDao.addContracts(

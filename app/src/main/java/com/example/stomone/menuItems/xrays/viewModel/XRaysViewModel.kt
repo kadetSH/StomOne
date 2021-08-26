@@ -6,17 +6,14 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import com.example.stomone.App
 import com.example.stomone.R
 import com.example.stomone.SingleLiveEvent
 import com.example.stomone.dagger.retrofit.repository.RetrofitServiceInterfaceXRays
-import com.example.stomone.jsonMy.NumberXRaysJS
-import com.example.stomone.jsonMy.PatientUIjs
 import com.example.stomone.menuItems.xrays.recyclerXRays.XRaysItem
 import com.example.stomone.room.xrays.RXRays
 import com.example.stomone.room.xrays.XRaysDao
-import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
-import java.io.IOException
 import javax.inject.Inject
 
 @Suppress("LocalVariableName")
@@ -36,45 +33,21 @@ class XRaysViewModel @Inject constructor(application: Application, private val x
     val booleanAnimation: LiveData<Boolean> get() = _booleanAnimation
 
     val readAllXRaysLiveData: LiveData<List<RXRays>> = xRaysDao.readAllRXRaysLiveData()
+    private val interactor = App.instance.xRaysInteractor
 
     fun isAnimation(bool: Boolean) {
         _booleanAnimation.postValue(bool)
     }
 
-
     @SuppressLint("CheckResult")
     fun getXRaysList(patientUI: String, requireContext: android.content.Context) {
-        try {
-            Observable.just(xRaysDao.readAllXRays())
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.newThread())
-                .subscribe({ result ->
-                    if (result.isEmpty()) {
-                        loadInformationIsServer(patientUI, requireContext)
-                    } else {
-                        _booleanAnimation.postValue(false)
-                    }
-                }, { error ->
-                    _booleanAnimation.postValue(false)
-                })
-        } catch (e: IOException) {
-            e.printStackTrace()
-            _toastMessage.postValue(e.toString())
-        }
-    }
-
-    @SuppressLint("CheckResult")
-    private fun loadInformationIsServer(
-        patientUI: String,
-        requireContext: android.content.Context
-    ) {
-        val JSON = PatientUIjs(patientUI)
-        mServise.patientXRaysRequest(JSON)
-            .subscribeOn(Schedulers.io())
-            .doOnError {
+        val listXRays = interactor.getXRaysList(patientUI)
+        listXRays
+            ?.subscribeOn(Schedulers.io())
+            ?.doOnError {
                 _booleanAnimation.postValue(false)
             }
-            .subscribe(
+            ?.subscribe(
                 { result ->
                     result.forEach { items ->
                         xRaysDao.addRXrays(
@@ -96,13 +69,16 @@ class XRaysViewModel @Inject constructor(application: Application, private val x
                     _toastMessage.postValue(requireContext.resources?.getString(R.string.template_x_rays_no_pictures))
                 }
             )
+        if (listXRays == null) {
+            _booleanAnimation.postValue(false)
+        }
     }
 
     @SuppressLint("CheckResult")
-    fun loadImage(xRaysItem: XRaysItem, position: Int) {
-        val JSON = NumberXRaysJS(xRaysItem.numberDirection)
+    fun loadImage(xRaysItem: XRaysItem) {
         _booleanAnimation.postValue(true)
-        mServise.patientLoaderPhotoXRays(JSON)
+
+        interactor.loadImage(xRaysItem.numberDirection)
             .subscribeOn(Schedulers.io())
             .doOnError {
                 _booleanAnimation.postValue(false)

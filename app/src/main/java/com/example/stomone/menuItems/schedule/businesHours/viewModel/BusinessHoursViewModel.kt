@@ -5,6 +5,7 @@ import android.app.Application
 import android.content.Context
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import com.example.stomone.App
 import com.example.stomone.R
 import com.example.stomone.SingleLiveEvent
 import com.example.stomone.dagger.retrofit.repository.RetrofitServiceInterfaceSchedule
@@ -17,9 +18,6 @@ import javax.inject.Inject
 class BusinessHoursViewModel @Inject constructor(application: Application) :
     AndroidViewModel(application) {
 
-    @Inject
-    lateinit var mServise: RetrofitServiceInterfaceSchedule
-
     private var _toastMessage = SingleLiveEvent<String>()
     val toastMessage: LiveData<String> get() = _toastMessage
 
@@ -28,6 +26,7 @@ class BusinessHoursViewModel @Inject constructor(application: Application) :
 
     private var _listBusinessHours = SingleLiveEvent<ArrayList<BusinessHoursResultJS>>()
     val listBusinessHours: LiveData<ArrayList<BusinessHoursResultJS>> get() = _listBusinessHours
+    private val interactor = App.instance.scheduleInteractor
 
     @SuppressLint("CheckResult")
     fun getBusinessHours(
@@ -35,8 +34,7 @@ class BusinessHoursViewModel @Inject constructor(application: Application) :
         dateRequest: String,
         periodOfTimeRequest: String
     ) {
-        val JSON = RequestDoctorRequestsJS(doctorRequest, dateRequest, periodOfTimeRequest)
-        mServise.businessHoursRequest(JSON)
+        interactor.getBusinessHours(doctorRequest, dateRequest, periodOfTimeRequest)
             .subscribeOn(Schedulers.io())
             .doOnError {
                 _toastMessage.postValue(it.toString())
@@ -65,7 +63,7 @@ class BusinessHoursViewModel @Inject constructor(application: Application) :
 
     @SuppressLint("CheckResult")
     fun makeToAppointment(anAppointmentJS: CreateAnAppointmentJS) {
-        mServise.createAnAppointmentRequest(anAppointmentJS)
+        interactor.makeToAppointment(anAppointmentJS)
             .subscribeOn(Schedulers.io())
             .doOnError {
                 _toastMessage.postValue(it.toString())

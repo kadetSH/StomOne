@@ -9,7 +9,6 @@ import android.widget.*
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.stomone.Constants
 import com.example.stomone.authorization.item.LoginItem
 import com.example.stomone.R
 import com.example.stomone.room.authorization.RLogin
@@ -33,9 +32,10 @@ class ActivationDatabaseFragment : DaggerFragment() {
     }
 
     companion object {
+        const val EXTRA_LOGIN = "EXTRA_LOGIN"
         fun newInstance(login: Serializable?): ActivationDatabaseFragment {
             val args = Bundle()
-            args.putSerializable(Constants.LOGIN, login)
+            args.putSerializable(EXTRA_LOGIN, login)
             val fragment = ActivationDatabaseFragment()
             fragment.arguments = args
             return fragment
@@ -76,7 +76,7 @@ class ActivationDatabaseFragment : DaggerFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         arguments?.let { arg ->
-            loginItem = arg.getSerializable(Constants.LOGIN) as LoginItem
+            loginItem = arg.getSerializable(EXTRA_LOGIN) as LoginItem
         }
         if (activity is ActivationClickListener) {
             listener = activity as ActivationClickListener
@@ -148,7 +148,7 @@ class ActivationDatabaseFragment : DaggerFragment() {
     }
 
     private fun requestLoginIsRoom(id: Int) {
-        viewModel.requestLoginIsRoom(id)
+        viewModel.checkLoginIsRoom(id)
     }
 
     private fun observeViewModel() {
@@ -176,9 +176,7 @@ class ActivationDatabaseFragment : DaggerFragment() {
         viewModel.universalIdentifier.observe(
             viewLifecycleOwner,
             androidx.lifecycle.Observer<String> { ui ->
-                listener.apply {
-                    this?.onEnterSelect(ui)
-                }
+                listener?.onEnterSelect(ui)
             })
 
         viewModel.readAllLogin.observe(viewLifecycleOwner, Observer<List<RLogin>> { result ->

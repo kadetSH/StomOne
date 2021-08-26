@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import com.example.stomone.App
 import com.example.stomone.SingleLiveEvent
 import com.example.stomone.dagger.retrofit.repository.RetrofitServiceInterfaceSchedule
 import com.example.stomone.jsonMy.DepartmentJS
@@ -26,6 +27,7 @@ class OfficeHoursViewModel @Inject constructor(application: Application) :
 
     private var _listOfficeHours = SingleLiveEvent<ArrayList<OfficeHoursJS>>()
     val listOfficeHours: LiveData<ArrayList<OfficeHoursJS>> get() = _listOfficeHours
+    private val interactor = App.instance.scheduleInteractor
 
     fun isAnimation(bool: Boolean) {
         _booleanAnimation.postValue(bool)
@@ -33,8 +35,7 @@ class OfficeHoursViewModel @Inject constructor(application: Application) :
 
     @SuppressLint("CheckResult")
     fun getOfficeHours(department: String) {
-        val JSON = DepartmentJS(department)
-        mServise.patientOfficeHoursRequest(JSON)
+        interactor.getOfficeHours(department)
             .subscribeOn(Schedulers.io())
             .doOnError {
                 _toastMessage.postValue(it.toString())

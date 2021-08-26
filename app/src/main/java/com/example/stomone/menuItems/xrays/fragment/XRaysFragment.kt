@@ -140,7 +140,7 @@ class XRaysFragment : DaggerFragment() {
             list
         ) { xRaysItem: XRaysItem, position: Int ->
             (activity as? OnXRaysClickListener)?.onXRaysClick(xRaysItem, position)
-            viewModel.loadImage(xRaysItem, position)
+            viewModel.loadImage(xRaysItem)
         }
         recyclerView = binding.idRecyclerViewXRays
         recyclerView?.layoutManager = layoutManager

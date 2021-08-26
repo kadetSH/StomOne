@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import com.example.stomone.App
 import com.example.stomone.SingleLiveEvent
 import com.example.stomone.dagger.retrofit.repository.RetrofitServiceInterfaceVisitHistory
 import com.example.stomone.jsonMy.PatientUIjs
@@ -15,7 +16,10 @@ import java.io.IOException
 import javax.inject.Inject
 
 @Suppress("LocalVariableName")
-class VisitHistoryViewModel @Inject constructor(application: Application, private val visitHistoryDao: VisitHistoryDao) :
+class VisitHistoryViewModel @Inject constructor(
+    application: Application,
+    private val visitHistoryDao: VisitHistoryDao
+) :
     AndroidViewModel(application) {
 
     @Inject
@@ -27,7 +31,9 @@ class VisitHistoryViewModel @Inject constructor(application: Application, privat
     private var _booleanAnimation = SingleLiveEvent<Boolean>()
     val booleanAnimation: LiveData<Boolean> get() = _booleanAnimation
 
-    val readAllVisitHistoryLiveData: LiveData<List<RVisitHistory>> = visitHistoryDao.readAllVisitHistoryLiveData()
+    val readAllVisitHistoryLiveData: LiveData<List<RVisitHistory>> =
+        visitHistoryDao.readAllVisitHistoryLiveData()
+    private val interactor = App.instance.visitHistoryInteractor
 
     fun isAnimation(bool: Boolean) {
         _booleanAnimation.postValue(bool)
@@ -35,38 +41,13 @@ class VisitHistoryViewModel @Inject constructor(application: Application, privat
 
     @SuppressLint("CheckResult")
     fun getVisitHistory(patientUI: String) {
-
-        try {
-            Observable.just(visitHistoryDao.readAllVisitHistory())
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.newThread())
-                .subscribe({ result ->
-                    if (result.isEmpty()) {
-                        loadInformationIsServer(patientUI)
-                    } else {
-                        _booleanAnimation.postValue(false)
-                    }
-                }, { error ->
-                    println("")
-                    _toastMessage.postValue(error.toString())
-                })
-        } catch (e: IOException) {
-            e.printStackTrace()
-            _toastMessage.postValue(e.toString())
-        }
-
-    }
-
-    @SuppressLint("CheckResult")
-    private fun loadInformationIsServer(patientUI: String) {
-        val JSON = PatientUIjs(patientUI)
-        mServise.patientVisitHistoryRequest(JSON)
-            .subscribeOn(Schedulers.io())
-            .doOnError {
+        val listVisitHistory = interactor.getVisitHistory(patientUI)
+        listVisitHistory
+            ?.subscribeOn(Schedulers.io())?.doOnError {
                 _toastMessage.postValue(it.toString())
                 _booleanAnimation.postValue(false)
             }
-            .subscribe(
+            ?.subscribe(
                 { result ->
                     result.forEach { items ->
                         visitHistoryDao.addVisitHistory(
@@ -87,6 +68,8 @@ class VisitHistoryViewModel @Inject constructor(application: Application, privat
                     _toastMessage.postValue(error.toString())
                 }
             )
+        if (listVisitHistory == null) {
+            _booleanAnimation.postValue(false)
+        }
     }
-
 }

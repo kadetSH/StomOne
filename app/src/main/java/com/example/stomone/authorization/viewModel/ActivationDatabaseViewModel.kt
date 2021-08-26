@@ -62,7 +62,7 @@ class ActivationDatabaseViewModel @Inject constructor(
             return
         }
         _booleanAnimation.postValue(true)
-        val JSON = Authorization(surname, name, patronymic, password)
+        val JSON = getAuthorization(surname, name, patronymic, password)
 
 
         val interactor = App.instance.authorizationInteractor
@@ -76,22 +76,14 @@ class ActivationDatabaseViewModel @Inject constructor(
             .subscribe({ result ->
                 if (result.result == context.resources.getString(R.string.toast_authorization_id_found)) {
                     interactor.clearRoom()
-                    var resultSearch = interactor.getLoginDao(
+                    interactor.getLoginData(
                         JSON.surname,
                         JSON.name,
-                        JSON.patronymic
+                        JSON.patronymic,
+                        JSON.password
                     )
-                    if (resultSearch == null) {
-                        val login =
-                            RLogin(0, JSON.surname, JSON.name, JSON.patronymic, JSON.password)
-                        interactor.addLoginDao(login)
-                        _universalIdentifier.postValue(result.id)
-                    } else {
-                        interactor.updateLoginDao(resultSearch.id, JSON.password)
-                        _booleanAnimation.postValue(false)
-                        _universalIdentifier.postValue(result.id)
-                    }
-
+                    _booleanAnimation.postValue(false)
+                    _universalIdentifier.postValue(result.id)
                 } else {
                     _booleanAnimation.postValue(false)
                     _toastMessage.postValue(result.result)
@@ -103,7 +95,7 @@ class ActivationDatabaseViewModel @Inject constructor(
     }
 
     @SuppressLint("CheckResult")
-    fun requestLoginIsRoom(id: Int) {
+    fun checkLoginIsRoom(id: Int) {
         Observable.fromCallable { authorizationDao.loginRequestByID(id) }
             .subscribeOn(Schedulers.io())
             .subscribe { item ->
@@ -111,5 +103,12 @@ class ActivationDatabaseViewModel @Inject constructor(
             }
     }
 
+    private fun getAuthorization(
+        surname: String,
+        name: String,
+        patronymic: String,
+        password: String
+    ): Authorization =
+        Authorization(surname, name, patronymic, password)
 }
 

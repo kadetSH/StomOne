@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import com.example.stomone.App
 import com.example.stomone.SingleLiveEvent
 import com.example.stomone.dagger.retrofit.repository.RetrofitServiceInterfaceRadiationDose
 import com.example.stomone.jsonMy.PatientUIjs
@@ -28,44 +29,21 @@ class RadiationDoseViewModel @Inject constructor(application: Application, priva
     val booleanAnimation: LiveData<Boolean> get() = _booleanAnimation
 
     val readAllRadiationDoseLiveData: LiveData<List<RRadiationDose>> = radiationDoseDao.readAllRadiationDoseLiveData()
-
+    private val interactor = App.instance.radiationDoseInteractor
     fun isAnimation(bool: Boolean) {
         _booleanAnimation.postValue(bool)
     }
 
     @SuppressLint("CheckResult")
     fun getRadiationDoseList(patientUI: String) {
-        try {
-            Observable.just(radiationDoseDao.readAllRadiationDose())
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.newThread())
-                .subscribe({ result ->
-                    if (result.isEmpty()) {
-                        loadInformationIsServer(patientUI)
-                    } else {
-                        _booleanAnimation.postValue(false)
-                    }
-                }, { error ->
-                    _booleanAnimation.postValue(false)
-                    _toastMessage.postValue(error.toString())
-                })
-        } catch (e: IOException) {
-            e.printStackTrace()
-            _booleanAnimation.postValue(false)
-            _toastMessage.postValue(e.toString())
-        }
-    }
-
-    @SuppressLint("CheckResult")
-    private fun loadInformationIsServer(patientUI: String) {
-        val JSON = PatientUIjs(patientUI)
-        mServise.patientRadiationDoseRequest(JSON)
-            .subscribeOn(Schedulers.io())
-            .doOnError {
+        val listRadiationDose = interactor.getRadiationDoseList(patientUI)
+        listRadiationDose
+            ?.subscribeOn(Schedulers.io())
+            ?.doOnError {
                 _booleanAnimation.postValue(false)
                 _toastMessage.postValue(it.toString())
             }
-            .subscribe(
+            ?.subscribe(
                 { result ->
                     result.forEach { items ->
                         radiationDoseDao.addRadiationDose(
@@ -86,6 +64,7 @@ class RadiationDoseViewModel @Inject constructor(application: Application, priva
                     _toastMessage.postValue(error.toString())
                 }
             )
+        if (listRadiationDose == null) _booleanAnimation.postValue(false)
     }
 
 }

@@ -7,4 +7,7 @@ data class Authorization(
     @SerializedName("Name") val name : String,
     @SerializedName("Patronymic") val patronymic : String,
     @SerializedName("Password") val password : String
+
 )
+
+

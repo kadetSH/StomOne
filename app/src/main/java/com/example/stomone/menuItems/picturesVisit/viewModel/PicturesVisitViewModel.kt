@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import com.example.stomone.App
 import com.example.stomone.SingleLiveEvent
 import com.example.stomone.dagger.retrofit.repository.RetrofitServiceInterfacePicturesVisit
 import com.example.stomone.jsonMy.NumberPicturesVisitJS
@@ -22,9 +23,6 @@ import javax.inject.Inject
 class PicturesVisitViewModel @Inject constructor(application: Application, private val picturesVisitDao: PicturesVisitDao) :
     AndroidViewModel(application) {
 
-    @Inject
-    lateinit var mServise: RetrofitServiceInterfacePicturesVisit
-
     private var _toastMessage = SingleLiveEvent<String>()
     val toastMessage: LiveData<String> get() = _toastMessage
 
@@ -35,43 +33,21 @@ class PicturesVisitViewModel @Inject constructor(application: Application, priva
     val booleanAnimation: LiveData<Boolean> get() = _booleanAnimation
 
     val readAllPicturesVisitLiveData: LiveData<List<RPicturesVisit>> = picturesVisitDao.readAllPicturesVisitLiveData()
-
+    private val interactor = App.instance.picturesVisitInteractor
     fun isAnimation(bool: Boolean) {
         _booleanAnimation.postValue(bool)
     }
 
     @SuppressLint("CheckResult")
     fun getPicturesVisitList(patientUI: String){
-        try {
-            Observable.just(picturesVisitDao.readAllPicturesVisit())
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.newThread())
-                .subscribe({ result ->
-                    if (result.isEmpty()) {
-                        loadInformationIsServer(patientUI)
-                    } else {
-                        _booleanAnimation.postValue(false)
-                    }
-                }, { error ->
-                    _booleanAnimation.postValue(false)
-                    _toastMessage.postValue(error.toString())
-                })
-        } catch (e: IOException) {
-            e.printStackTrace()
-            _toastMessage.postValue(e.toString())
-        }
-    }
-
-    @SuppressLint("CheckResult")
-    private fun loadInformationIsServer(patientUI: String){
-        val JSON = PatientUIjs(patientUI)
-        mServise.patientPicturesVisitRequest(JSON)
-            .subscribeOn(Schedulers.io())
-            .doOnError {
+        val listPicturesVisit = interactor.getPicturesVisitList(patientUI)
+        listPicturesVisit
+            ?.subscribeOn(Schedulers.io())
+            ?.doOnError {
                 _booleanAnimation.postValue(false)
                 _toastMessage.postValue(it.toString())
             }
-            .subscribe(
+            ?.subscribe(
                 { result ->
                     result.forEach { items ->
                         picturesVisitDao.addPicturesVisit(RPicturesVisit(0, items.dateOfReceipt, items.numberPicture, items.doctor))
@@ -83,13 +59,15 @@ class PicturesVisitViewModel @Inject constructor(application: Application, priva
                     _toastMessage.postValue(error.toString())
                 }
             )
+        if (listPicturesVisit == null){
+            _booleanAnimation.postValue(false)
+        }
     }
 
     @SuppressLint("CheckResult")
     fun loadPicturesVisit(itemPictures: PicturesVisitItem){
-        val gson = NumberPicturesVisitJS(itemPictures.numberPicture)
         _booleanAnimation.postValue(true)
-        mServise.patientLoaderPicturesVisit(gson)
+        interactor.loadPicturesVisit(itemPictures.numberPicture)
             .subscribeOn(Schedulers.io())
             .doOnError {
                 _booleanAnimation.postValue(false)

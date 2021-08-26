@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import com.example.stomone.App
 import com.example.stomone.SingleLiveEvent
 import com.example.stomone.dagger.retrofit.repository.RetrofitServiceInterfaceApplications
 import com.example.stomone.jsonMy.ListOfApplicationsJS
@@ -33,8 +34,10 @@ class AppointmentViewModel @Inject constructor(application: Application) :
     @SuppressLint("CheckResult")
     @Suppress("LocalVariableName")
     fun onViewCreated(patientUI: String) {
-        val JSON = PatientUIjs(patientUI)
-        mServise.listOfApplicationsRequest(JSON)
+        val interactor = App.instance.appointmentInteractor
+        val JSON = interactor.getPatientUIjs(patientUI)
+        val result: io.reactivex.Observable<ArrayList<ListOfApplicationsJS>> = interactor.getListOfApplications(JSON)
+        result
             .subscribeOn(Schedulers.io())
             .doOnError {
                 _booleanAnimation.postValue(false)

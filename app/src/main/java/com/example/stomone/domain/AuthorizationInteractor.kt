@@ -42,17 +42,24 @@ class AuthorizationInteractor(
         radiationDoseDao.deleteAllRadiationDose()
     }
 
-    fun getLoginDao(
-        surname: String, name: String, patronymic: String
-    ): RLogin {
-        return authorizationDao.searchLogin(surname, name, patronymic)
+    fun getLoginData(
+        surname: String, name: String, patronymic: String, password: String
+    ) {
+        val resultSearch = authorizationDao.searchLogin(surname, name, patronymic)
+        if (resultSearch == null) {
+            val login =
+                RLogin(0, surname, name, patronymic, password)
+            addLoginData(login)
+        } else {
+            updateLoginDao(resultSearch.id, password)
+        }
     }
 
-    fun addLoginDao(login: RLogin) {
+    private fun addLoginData(login: RLogin) {
         authorizationDao.addLogin(login)
     }
 
-    fun updateLoginDao(id: Int, password: String) {
+    private fun updateLoginDao(id: Int, password: String) {
         authorizationDao.updateLogin(id, password)
     }
 
