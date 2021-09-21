@@ -10,4 +10,5 @@ object Constants {
     const val WINDOW = "window"
     const val NAME_PUSH = "Название пуша"
     const val MESSAGE_PUSH = "Сообщение пуша"
+    const val NEWS_ITEM = "Описание новости"
 }

@@ -12,6 +12,8 @@ import com.example.stomone.room.contactInformation.RContactInformation
 import com.example.stomone.room.authorization.RLogin
 import com.example.stomone.room.contracts.ContractsDao
 import com.example.stomone.room.contracts.RContracts
+import com.example.stomone.room.news.NewsDao
+import com.example.stomone.room.news.RNews
 import com.example.stomone.room.picturesVisit.PicturesVisitDao
 import com.example.stomone.room.picturesVisit.RPicturesVisit
 import com.example.stomone.room.radiationDose.RRadiationDose
@@ -23,7 +25,7 @@ import com.example.stomone.room.xrays.XRaysDao
 
 @Database(
     entities = [RLogin::class, RContactInformation::class, RContracts::class, RVisitHistory::class,
-        RXRays::class, RPicturesVisit::class, RRadiationDose::class], version = 8, exportSchema = false
+        RXRays::class, RPicturesVisit::class, RRadiationDose::class, RNews::class], version = 9, exportSchema = false
 )
 abstract class LoginDatabase : RoomDatabase() {
 
@@ -34,6 +36,7 @@ abstract class LoginDatabase : RoomDatabase() {
     abstract fun xRaysDao(): XRaysDao
     abstract fun picturesVisitDao(): PicturesVisitDao
     abstract fun radiationDoseDao(): RadiationDoseDao
+    abstract fun newsDao(): NewsDao
 
     companion object {
         @Volatile
@@ -100,6 +103,14 @@ abstract class LoginDatabase : RoomDatabase() {
                 }
             }
 
+            val MIGRATION_8_9 = object : Migration(8, 9) {
+                override fun migrate(database: SupportSQLiteDatabase) {
+                    database.execSQL(
+                        "CREATE TABLE `news_table` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT NOT NULL, `content` TEXT NOT NULL, `imagePath` TEXT NOT NULL)"
+                    )
+                }
+            }
+
             synchronized(this) {
                 val instance = Room.databaseBuilder(
                     application.applicationContext,
@@ -113,7 +124,8 @@ abstract class LoginDatabase : RoomDatabase() {
                         MIGRATION_4_5,
                         MIGRATION_5_6,
                         MIGRATION_6_7,
-                        MIGRATION_7_8
+                        MIGRATION_7_8,
+                        MIGRATION_8_9
                     )
                     .allowMainThreadQueries()
                     .build()

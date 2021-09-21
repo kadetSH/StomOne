@@ -12,6 +12,9 @@ import com.example.stomone.databinding.AppBarMainBinding
 import com.example.stomone.menuItems.appointment.fragment.AppointmentFragment
 import com.example.stomone.menuItems.contactInformation.fragment.ContactInformationFragment
 import com.example.stomone.menuItems.contracts.fragment.ContractsFragment
+import com.example.stomone.menuItems.news.fragment.NewsDescriptionFragment
+import com.example.stomone.menuItems.news.fragment.NewsFragment
+import com.example.stomone.menuItems.news.recyclerNews.NewsItem
 import com.example.stomone.menuItems.picturesVisit.fragment.PicturesVisitFragment
 import com.example.stomone.menuItems.radiationDose.fragment.RadiationDoseFragment
 import com.example.stomone.menuItems.schedule.businesHours.fragment.BusinessHoursFragment
@@ -31,8 +34,8 @@ class PatientRecordActivity : DaggerAppCompatActivity(),
     ListDepartmentFragment.OnClickViewDepartment,
     OfficeHoursFragment.OnOfficeHoursClickListener,
     PicturesVisitFragment.OnClickViewPicturesVisit,
-    TitleController
-   {
+    TitleController,
+    NewsFragment.OnNewsClickListener {
 
     private var patientUI = ""
     private lateinit var binding: ActivityPatientRecordBinding
@@ -103,6 +106,9 @@ class PatientRecordActivity : DaggerAppCompatActivity(),
             resources.getString(R.string.fragment_list_department_label_LOR) -> {
                 openViewSchedule()
             }
+            resources.getString(R.string.drawer_menu_news_description) -> {
+                openViewNews()
+            }
             else -> {
                 binding.drawerLayoutPatientActivity.openDrawer(GravityCompat.START)
             }
@@ -119,6 +125,7 @@ class PatientRecordActivity : DaggerAppCompatActivity(),
             R.id.id_dm_irradiation -> openRadiationDose()
             R.id.id_dm_appointment -> openAppointment()
             R.id.id_dm_schedule -> openViewSchedule()
+            R.id.id_dm_news -> openViewNews()
         }
         binding.drawerLayoutPatientActivity.closeDrawer(GravityCompat.START)
         return true
@@ -230,6 +237,17 @@ class PatientRecordActivity : DaggerAppCompatActivity(),
             .commit()
     }
 
+    private fun openViewNews() {
+        title = resources.getString(R.string.drawer_menu_news)
+        supportFragmentManager
+            .beginTransaction()
+            .replace(
+                R.id.FrameLayoutContainerContact,
+                NewsFragment()
+            )
+            .commit()
+    }
+
     override fun onClickDepartment(department: String) {
         supportFragmentManager
             .beginTransaction()
@@ -279,5 +297,18 @@ class PatientRecordActivity : DaggerAppCompatActivity(),
     override fun setTitle(titleIsFragment: String) {
         title = titleIsFragment
     }
+
+    override fun onNewsClick(newsItem: NewsItem) {
+        supportFragmentManager
+            .beginTransaction()
+            .replace(
+                R.id.FrameLayoutContainerContact,
+                NewsDescriptionFragment.newInstance(
+                    newsItem
+                )
+            )
+            .commit()
+    }
+
 
 }

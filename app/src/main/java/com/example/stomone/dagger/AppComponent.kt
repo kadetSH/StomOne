@@ -8,6 +8,7 @@ import com.example.stomone.dagger.retrofit.NetworkModule
 import com.example.stomone.dagger.room.RoomModule
 import com.example.stomone.menuItems.contactInformation.viewModel.ContactInformationViewModel
 import com.example.stomone.menuItems.contracts.viewModel.ContractsViewModel
+import com.example.stomone.menuItems.news.viewModel.NewsViewModel
 import com.example.stomone.menuItems.picturesVisit.viewModel.PicturesVisitViewModel
 import com.example.stomone.menuItems.radiationDose.viewModel.RadiationDoseViewModel
 import com.example.stomone.menuItems.visitHistory.viewModel.VisitHistoryViewModel
@@ -50,5 +51,6 @@ interface AppComponent : AndroidInjector<App>{
     fun injectXRays(xRaysViewModel: XRaysViewModel)
     fun injectPicturesVisit(picturesVisitViewModel: PicturesVisitViewModel)
     fun injectRadiationDose(radiationDoseViewModel: RadiationDoseViewModel)
+    fun injectNews(newsViewModel: NewsViewModel)
 
 }

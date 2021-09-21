@@ -98,6 +98,12 @@
     <string name="template_appointment_time_end_label">по:</string>
     <!--    -->
 
+    <!--   Template news -->
+    <string name="template_news_title">Тема новостей</string>
+    <string name="template_news_message">Содержание новостей</string>
+    <string name="template_news_btn">Просмотр</string>
+    <!--    -->
+
     <!--    Drawer menu-->
     <string name="drawer_menu_contact_information">Контактная информация</string>
     <string name="drawer_menu_contracts">Договоры</string>
@@ -107,6 +113,8 @@
     <string name="drawer_menu_irradiation">Дозы облучения</string>
     <string name="drawer_menu_appointment">Мои записи на прием</string>
     <string name="drawer_menu_schedule">Расписание</string>
+    <string name="drawer_menu_news">Новости</string>
+    <string name="drawer_menu_news_description">Новости: описание</string>
     <!--    -->
 
     <!--    Messaging service-->

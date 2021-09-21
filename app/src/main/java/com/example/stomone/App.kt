@@ -6,6 +6,7 @@ import com.example.stomone.domain.*
 import com.example.stomone.room.authorization.AuthorizationDao
 import com.example.stomone.room.contactInformation.ContactInformationDao
 import com.example.stomone.room.contracts.ContractsDao
+import com.example.stomone.room.news.NewsDao
 import com.example.stomone.room.picturesVisit.PicturesVisitDao
 import com.example.stomone.room.radiationDose.RadiationDoseDao
 import com.example.stomone.room.visitHistory.VisitHistoryDao
@@ -44,6 +45,12 @@ class App : DaggerApplication() {
     lateinit var mServiseXRaysInteractor: RetrofitServiceInterfaceXRays
 
     @Inject
+    lateinit var mServiseNewsInteractor: RetrofitServiceInterfaceNews
+
+    @Inject
+    lateinit var mServiseNewsDescriptionInteractor: RetrofitServiceInterfaceNewsDescription
+
+    @Inject
     lateinit var authorizationDao: AuthorizationDao
 
     @Inject
@@ -64,6 +71,9 @@ class App : DaggerApplication() {
     @Inject
     lateinit var radiationDoseDao: RadiationDoseDao
 
+    @Inject
+    lateinit var newsDao: NewsDao
+
     lateinit var authorizationInteractor: AuthorizationInteractor
     lateinit var appointmentInteractor: AppointmentInteractor
     lateinit var contactInformationInteractor: ContactInformationInteractor
@@ -73,6 +83,8 @@ class App : DaggerApplication() {
     lateinit var scheduleInteractor: ScheduleInteractor
     lateinit var visitHistoryInteractor: VisitHistoryInteractor
     lateinit var xRaysInteractor: XRaysInteractor
+    lateinit var newsInteractor: NewsInteractor
+    lateinit var newsDescriptionInteractor: NewsDescriptionInteractor
 
     override fun onCreate() {
         super.onCreate()
@@ -89,7 +101,8 @@ class App : DaggerApplication() {
             visitHistoryDao,
             xRaysDao,
             picturesVisitDao,
-            radiationDoseDao
+            radiationDoseDao,
+            newsDao
         )
 
         appointmentInteractor = AppointmentInteractor(
@@ -129,6 +142,16 @@ class App : DaggerApplication() {
             mServiseXRaysInteractor,
             xRaysDao
         )
+
+        newsInteractor = NewsInteractor(
+            mServiseNewsInteractor,
+            newsDao
+        )
+
+        newsDescriptionInteractor = NewsDescriptionInteractor(
+            mServiseNewsDescriptionInteractor
+        )
+
     }
 
     private val applicationInjector = DaggerAppComponent.builder().application(this).build()

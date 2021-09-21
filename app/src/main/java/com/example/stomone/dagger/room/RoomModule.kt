@@ -5,6 +5,7 @@ import com.example.stomone.room.LoginDatabase
 import com.example.stomone.room.contactInformation.ContactInformationDao
 import com.example.stomone.room.authorization.AuthorizationDao
 import com.example.stomone.room.contracts.ContractsDao
+import com.example.stomone.room.news.NewsDao
 import com.example.stomone.room.picturesVisit.PicturesVisitDao
 import com.example.stomone.room.radiationDose.RadiationDoseDao
 import com.example.stomone.room.visitHistory.VisitHistoryDao
@@ -62,6 +63,12 @@ class RoomModule {
     @Provides
     fun getRadiationDoseDao(loginDatabase: LoginDatabase): RadiationDoseDao {
         return loginDatabase.radiationDoseDao()
+    }
+
+    @Singleton
+    @Provides
+    fun getNewsDao(loginDatabase: LoginDatabase): NewsDao {
+        return loginDatabase.newsDao()
     }
 
 }

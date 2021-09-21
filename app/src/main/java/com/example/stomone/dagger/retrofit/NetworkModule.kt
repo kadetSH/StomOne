@@ -72,6 +72,18 @@ class NetworkModule {
 
     @Singleton
     @Provides
+    fun getRetrofitServiceInterfaceNews(retrofit: Retrofit): RetrofitServiceInterfaceNews {
+        return retrofit.create(RetrofitServiceInterfaceNews::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun getRetrofitServiceInterfaceNewsDescription(retrofit: Retrofit): RetrofitServiceInterfaceNewsDescription {
+        return retrofit.create(RetrofitServiceInterfaceNewsDescription::class.java)
+    }
+
+    @Singleton
+    @Provides
     fun getRetrofitInstance(client: OkHttpClient): Retrofit{
         return Retrofit.Builder()
             .baseUrl(baseURL)

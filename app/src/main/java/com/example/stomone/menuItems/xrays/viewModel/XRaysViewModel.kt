@@ -87,7 +87,7 @@ class XRaysViewModel @Inject constructor(application: Application, private val x
             .subscribe(
                 { result ->
                     _booleanAnimation.postValue(false)
-                    var bmp1: Bitmap? =
+                    val bmp1: Bitmap? =
                         BitmapFactory.decodeStream(result.byteStream())
                     bmp1?.let {
                         _viewPhoto.postValue(it)

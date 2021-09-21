@@ -10,6 +10,7 @@ import com.example.stomone.room.authorization.AuthorizationDao
 import com.example.stomone.room.authorization.RLogin
 import com.example.stomone.room.contactInformation.ContactInformationDao
 import com.example.stomone.room.contracts.ContractsDao
+import com.example.stomone.room.news.NewsDao
 import com.example.stomone.room.picturesVisit.PicturesVisitDao
 import com.example.stomone.room.radiationDose.RadiationDoseDao
 import com.example.stomone.room.visitHistory.VisitHistoryDao
@@ -23,7 +24,8 @@ class AuthorizationInteractor(
     private val visitHistoryDao: VisitHistoryDao,
     private val xRaysDao: XRaysDao,
     private val picturesVisitDao: PicturesVisitDao,
-    private val radiationDoseDao: RadiationDoseDao
+    private val radiationDoseDao: RadiationDoseDao,
+    private val newsDao: NewsDao
 ) {
 
     @SuppressLint("CheckResult")
@@ -40,6 +42,7 @@ class AuthorizationInteractor(
         xRaysDao.deleteAllRXRays()
         picturesVisitDao.deleteAllPicturesVisit()
         radiationDoseDao.deleteAllRadiationDose()
+        newsDao.deleteAllNews()
     }
 
     fun getLoginData(

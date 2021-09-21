@@ -7,6 +7,8 @@ import com.example.stomone.authorization.viewModel.SetPasswordViewModel
 import com.example.stomone.menuItems.appointment.viewModel.AppointmentViewModel
 import com.example.stomone.menuItems.contactInformation.viewModel.ContactInformationViewModel
 import com.example.stomone.menuItems.contracts.viewModel.ContractsViewModel
+import com.example.stomone.menuItems.news.viewModel.NewsDescriptionViewModel
+import com.example.stomone.menuItems.news.viewModel.NewsViewModel
 import com.example.stomone.menuItems.picturesVisit.viewModel.PicturesVisitViewModel
 import com.example.stomone.menuItems.radiationDose.viewModel.RadiationDoseViewModel
 import com.example.stomone.menuItems.schedule.businesHours.viewModel.BusinessHoursViewModel
@@ -76,6 +78,16 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(AppointmentViewModel::class)
     abstract fun bindListAppointmentViewModel(favoritesFilmsViewModel: AppointmentViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(NewsViewModel::class)
+    abstract fun bindListNewsViewModel(favoritesFilmsViewModel: NewsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(NewsDescriptionViewModel::class)
+    abstract fun bindListNewsDescriptionViewModel(favoritesFilmsViewModel: NewsDescriptionViewModel): ViewModel
 
     @Binds
     abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
